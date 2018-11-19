@@ -1,64 +1,52 @@
 <p id="notice"><%= notice %></p>
-
-<h1 class="govuk-heading-l">My Ideas</h1>
 <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
+  <h1 class="govuk-heading-l">My Ideas</h1>
+  <div class="govuk-grid-column-two-thirds">
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col">Area of interest</th>
+          <th class="govuk-table__header" scope="col">Business area</th>
+          <th class="govuk-table__header" scope="col">It system</th>
+          <th class="govuk-table__header" scope="col">Title</th>
+          <th class="govuk-table__header" scope="col">Idea</th>
+          <!-- <th class="govuk-table__header" scope="col">Benefits</th> -->
+          <!-- <th class="govuk-table__header" scope="col" >Impact</th> -->
+          <!-- <th class="govuk-table__header" scope="col">Involvement</th> -->
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <% @ideas.each do |idea| %>
           <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col">Area of interest</th>
-            <th class="govuk-table__header" scope="col">Business area</th>
-            <th class="govuk-table__header" scope="col">It system</th>
-            <th class="govuk-table__header" scope="col">Title</th>
-            <th class="govuk-table__header" scope="col">Idea</th>
-            <th class="govuk-table__header" scope="col">Benefits</th>
-            <th class="govuk-table__header" scope="col" >Impact</th>
-            <th class="govuk-table__header" scope="col">Involvement</th>
-            
+            <td class="govuk-table__cell" scope="row"><%= idea.area_of_interest %></td>
+            <td class="govuk-table__cell" scope="row"><%= idea.business_area %></td>
+            <td class="govuk-table__cell" scope="row"><%= idea.it_system %></td>
+            <td class="govuk-table__cell" scope="row"><%= idea.title %></td>
+            <td class="govuk-table__cell" scope="row"><%= idea.idea %></td>
+           <!-- <td class="govuk-table__cell" scope="row"><%= idea.benefits %></td> -->
+           <!-- <td class="govuk-table__cell" scope="row"><%= idea.impact %></td> -->
+            <!-- <td class="govuk-table__cell" scope="row"><%= idea.involvement %></td> -->
+            <td class="govuk-table__cell" scope="row"><%= link_to 'Show', idea %></td>
+            <td class="govuk-table__cell" scope="row"><%= link_to 'Edit', edit_idea_path(idea) %></td>
+            <td class="govuk-table__cell" scope="row"><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
-        </thead>
-
-        <tbody class="govuk-table__body">
-          <% @ideas.each do |idea| %>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell" scope="row"><%= idea.area_of_interest %></td>
-              <td class="govuk-table__cell" scope="row"><%= idea.business_area %></td>
-              <td class="govuk-table__cell" scope="row"><%= idea.it_system %></td>
-              <td class="govuk-table__cell" scope="row"><%= idea.title %></td>
-              <td class="govuk-table__cell" scope="row"><%= idea.idea %></td>
-              <td class="govuk-table__cell" scope="row"><%= idea.benefits %></td>
-              <td class="govuk-table__cell" scope="row"><%= idea.impact %></td>
-              <td class="govuk-table__cell" scope="row"><%= idea.involvement %></td>
-              <td class="govuk-table__cell" scope="row"><%= link_to 'Show', idea %></td>
-              <td class="govuk-table__cell" scope="row"><%= link_to 'Edit', edit_idea_path(idea) %></td>
-              <td class="govuk-table__cell" scope="row"><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-
-
-
-    </div>
-    
-
-     
-    <nav class="govuk-grid-column-one-third ">
-      <ul class="govuk-list">
-        <li class="govuk-body govuk-!-margin-bottom-3">
-          <%= link_to 'Add New Idea', new_idea_path %>
-          <% if current_user.admin? %>
-            <%= link_to 'Users', users_path %>
-          <% end %>
-        </li>
-        <li class="govuk-body govuk-!-margin-bottom-3">
-          2nd item
-        </li>
-      </ul>
-   </nav>
-
-
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <nav class="govuk-grid-column-one-third ">
+    <ul class="govuk-list">
+      <li class="govuk-body govuk-!-margin-bottom-3">
+        <%= link_to 'Add New Idea', new_idea_path %>
+        <% if current_user.admin? %>
+          <%= link_to 'Users', users_path %>
+        <% end %>
+      </li>
+      <li class="govuk-body govuk-!-margin-bottom-3">
+        2nd item
+      </li>
+    </ul>
+  </nav>
 </div>
 
 
