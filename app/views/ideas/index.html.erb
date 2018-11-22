@@ -2,7 +2,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <table class="govuk-table">
-      <h1 class="govuk-heading-l">My Ideas</h1>
+      <!-- <h1 class="govuk-heading-l">My Ideas</h1> -->
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th class="govuk-table__header" scope="col">Idea ID</th>
@@ -15,7 +15,7 @@
       <tbody class="govuk-table__body">
         <% @ideas.each do |idea| %>
           <tr>
-            <td class="govuk-table__cell"><%=  %></td>
+            <td class="govuk-table__cell">Idea ID</td>
             <td class="govuk-table__cell"><%= idea.title %></td>
             <td class="govuk-table__cell"><%= idea.status %></td>
             <td class="govuk-table__cell"><%= idea.updated_at %></td>
@@ -40,10 +40,6 @@
 <!-- tabs experiment-->
 
 <div class="govuk-tabs" data-module="tabs">
-  <h2 class="govuk-tabs__title">
-    Home
-  </h2>
-
   <ul class="govuk-tabs__list">
     <li class="govuk-tabs__list-item">
       <a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#my-ideas">
@@ -72,7 +68,7 @@
     </li>
   </ul>
   <section class="govuk-tabs__panel" id="my-ideas">
-    <h2 class="govuk-heading-l"></h2>
+    <h2 class="govuk-heading-l">My Ideas</h2>
     <table class="govuk-table">
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
@@ -85,7 +81,7 @@
       <tbody class="govuk-table__body">
       <% @ideas.each do |idea| %>
         <tr>
-          <td class="govuk-table__cell"><%=  %></td>
+          <td class="govuk-table__cell">Idea ID</td>
           <td class="govuk-table__cell"><%= idea.title %></td>
           <td class="govuk-table__cell"><%= idea.status %></td>
           <td class="govuk-table__cell"><%= idea.updated_at %></td>
