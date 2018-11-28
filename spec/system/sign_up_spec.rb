@@ -10,7 +10,7 @@ RSpec.describe 'Sign up', type: :system do
       fill_in 'user_password', with: 'change_me'
       fill_in 'user_password_confirmation', with: 'change_me'
       click_button 'Sign up'
-      expect(page).to have_content 'Welcome! You have signed up successfully.'
+      expect(page).to have_content 'You have successfully signed up, please click the confirmation link sent to your email'
     end
 
     it 'should allow digital.justice.gov.uk email addresses' do
@@ -19,7 +19,7 @@ RSpec.describe 'Sign up', type: :system do
       fill_in 'user_password', with: 'change_me'
       fill_in 'user_password_confirmation', with: 'change_me'
       click_button 'Sign up'
-      expect(page).to have_content 'Welcome! You have signed up successfully.'
+      expect(page).to have_content 'You have successfully signed up, please click the confirmation link sent to your email'
     end
 
     it 'should not allow non justice.gov.uk email addresses' do
