@@ -1,33 +1,6 @@
-<p id="notice"><%= notice %></p>
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <table class="govuk-table">
-      <!-- <h1 class="govuk-heading-l">My Ideas</h1> -->
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col">Idea ID</th>
-          <th class="govuk-table__header" scope="col">Title of Idea</th>
-          <th class="govuk-table__header" scope="col" >Status</th>
-          <th class="govuk-table__header" scope="col" >Last updated</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-        <% @ideas.each do |idea| %>
-          <tr>
-            <td class="govuk-table__cell">Idea ID</td>
-            <td class="govuk-table__cell"><%= idea.title %></td>
-            <td class="govuk-table__cell"><%= idea.status %></td>
-            <td class="govuk-table__cell"><%= idea.updated_at %></td>
-            <td><%= link_to 'Show', idea %></td>
-            <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
-            <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <nav class="govuk-grid-column-one-third navbar">
+<p class="notice" id="notice"><%= notice %></p>
+
+  <nav class="nav">
     <%= link_to 'New Idea', new_idea_path %>
     <% if current_user.admin? %>
       <%= link_to 'Users', users_path %>
@@ -35,9 +8,8 @@
       <%= link_to 'Submitted Ideas', ideas_path(view: "submitted") %>
     <% end %>
   </nav>
-</div>
+  <h1 class="govuk-heading-l">Home</h1>
 
-<!-- tabs experiment-->
 
 <div class="govuk-tabs" data-module="tabs">
   <ul class="govuk-tabs__list">

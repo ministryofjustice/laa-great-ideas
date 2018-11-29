@@ -51,20 +51,28 @@
         <a href="/" class="govuk-header__link govuk-header__link--service-name">
           Great Ideas
         </a>
+        <nav>
+          <div id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
+            <div class="govuk-header__navigation-item govuk-header__navigation-item--active">
+              <a class="govuk-header__link ">
+                <% if current_user %>
+                    <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "signout" %>
+                <% end %>
+              </a>
+            </div>
+          </div>
+        </nav>    
       </div>
     </div>
   </header>
 
   <div class="govuk-width-container">
-  
     <main class="govuk-main-wrapper " id="main-content" role="main">
-      <% if current_user %>
       <div class="column-full">
-        <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "signout" %>
       </div>
-      <% end %>
       <%= yield %>
-    </main>
+    </main> 
+
   </div>
 
   <footer class="govuk-footer " role="contentinfo">
