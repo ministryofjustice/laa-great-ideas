@@ -21,9 +21,9 @@ RSpec.describe 'Update status', type: :system do
       visit edit_idea_path(idea)
       expect(page).to have_select('idea_status')
       select 'Approved', from: 'idea_status'
-      click_button 'Update Idea'
-      idea.reload
-      expect(idea.status).to eq('approved')
+      click_button 'Submit'
+      @idea.reload
+      expect(@idea.status).to eq('approved')
       expect(page).to have_text('Idea was successfully updated')
       visit ideas_path
       expect(page).to have_text('approved')

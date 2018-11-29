@@ -23,11 +23,9 @@ RSpec.describe 'Assign idea', type: :system do
       expect(page).to have_select('idea_assigned_user_id')
       expect(page).to have_select('idea_participation_level')
       select 'admin@justice.gov.uk', from: 'idea_assigned_user_id'
-      select 'Lead', from: 'idea_participation_level'
-      click_button 'Update Idea'
-      idea.reload
-      expect(idea.assigned_user_id).to eq(admin_user.id)
-      expect(idea.participation_level).to eq('lead')
+      click_button 'Submit'
+      @idea.reload
+      expect(@idea.assigned_user_id).to eq(@admin_user.id)
       expect(page).to have_text('Idea was successfully updated')
       visit ideas_path(view: 'assigned')
       expect(page).to have_text('New idea1')
