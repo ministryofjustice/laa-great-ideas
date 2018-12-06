@@ -32,133 +32,29 @@
       </a>
     </li>
   </ul>
+
   <section class="govuk-tabs__panel" id="my-ideas">
     <h2 class="govuk-heading-l">My Ideas</h2>
-    <table class="govuk-table">
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col">Idea ID</th>
-          <th class="govuk-table__header" scope="col">Title</th>
-          <th class="govuk-table__header" scope="col">Status</th>
-          <th class="govuk-table__header" scope="col">Last Updated</th>
-        </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-        <% @ideas.each do |idea| %>
-          <tr>
-            <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
-            <td class="govuk-table__cell"><%= idea.title %></td>
-            <td class="govuk-table__cell"><%= idea.status %></td>
-            <td class="govuk-table__cell"><%= idea.updated_at.strftime("%e %B %Y") %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render 'my_ideas_table' %>
   </section>
+
   <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="awaiting-approval">
     <h2 class="govuk-heading-l">Awaiting Approval</h2>
-    <table class="govuk-table">
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col">Idea ID</th>
-          <th class="govuk-table__header" scope="col">Title</th>
-          <th class="govuk-table__header" scope="col">Author</th>
-          <th class="govuk-table__header" scope="col">Submitted Date</th>
-        </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-        <% @ideas.each do |idea| %>
-          <tr>
-            <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
-            <td class="govuk-table__cell"><%= idea.title %></td>
-            <td class="govuk-table__cell"><%= idea.user.email %></td>
-            <td class="govuk-table__cell"><%= idea.submission_date&.strftime("%e %B %Y") %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render 'awaiting_approval_table' %>
   </section>
+
   <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="review-date">
     <h2 class="govuk-heading-l">Review Date</h2>
-    <table class="govuk-table">
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col">Idea ID</th>
-          <th class="govuk-table__header" scope="col">Title</th>
-          <th class="govuk-table__header" scope="col">Author</th>
-          <th class="govuk-table__header" scope="col">Status</th>
-          <th class="govuk-table__header" scope="col">Submitted Date</th>
-          <th class="govuk-table__header" scope="col">Review Date</th>
-        </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-        <% @ideas.each do |idea| %>
-          <tr>
-            <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
-            <td class="govuk-table__cell"><%= idea.title %></td>
-            <td class="govuk-table__cell"><%= idea.user.email %></td>
-            <td class="govuk-table__cell"><%= idea.status %></td>
-            <td class="govuk-table__cell"><%= idea.submission_date&.strftime("%e %B %Y") %></td>
-            <td class="govuk-table__cell"><%= idea.review_date&.strftime("%e %B %Y") %></td>
-          </tr>
-        <% end %>  
-      </tbody>
-    </table>
+    <%= render 'review_date_and_uncompleted_ideas_table' %>
   </section>
+
   <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="uncompleted-ideas">
     <h2 class="govuk-heading-l">All Uncompleted Ideas</h2>
-    <table class="govuk-table">
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col">Idea ID</th>
-          <th class="govuk-table__header" scope="col">Title</th>
-          <th class="govuk-table__header" scope="col">Author</th>
-          <th class="govuk-table__header" scope="col">Status</th>
-          <th class="govuk-table__header" scope="col">Submitted Date</th>
-          <th class="govuk-table__header" scope="col">Review Date</th>
-        </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-        <% @ideas.each do |idea| %>
-          <tr>
-            <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
-            <td class="govuk-table__cell"><%= idea.title %></td>
-            <td class="govuk-table__cell"><%= idea.user.email %></td>
-            <td class="govuk-table__cell"><%= idea.status %></td>
-            <td class="govuk-table__cell"><%= idea.submission_date&.strftime("%e %B %Y") %></td>
-            <td class="govuk-table__cell"><%= idea.review_date&.strftime("%e %B %Y") %></td>
-          </tr>
-        <% end %>  
-      </tbody>
-    </table>
+    <%= render 'review_date_and_uncompleted_ideas_table' %>
   </section>
+
   <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="allocated-ideas">
     <h2 class="govuk-heading-l">My Allocated Ideas</h2>
-    <table class="govuk-table">
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col">Idea ID</th>
-          <th class="govuk-table__header" scope="col">Participation level</th>
-          <th class="govuk-table__header" scope="col">Title</th>
-          <th class="govuk-table__header" scope="col">Area of Intrest</th>
-          <th class="govuk-table__header" scope="col">Status</th>
-          <th class="govuk-table__header" scope="col">Submitted Date</th>
-          <th class="govuk-table__header" scope="col">Review Date</th>
-        </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-        <% @ideas.each do |idea| %>
-          <tr>
-            <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
-            <td class="govuk-table__cell"><%= idea.participation_level %></td>
-            <td class="govuk-table__cell"><%= idea.title %></td>
-            <td class="govuk-table__cell"><%= idea.area_of_interest %></td>
-            <td class="govuk-table__cell"><%= idea.status %></td>
-            <td class="govuk-table__cell"><%= idea.submission_date&.strftime("%e %B %Y") %></td>
-            <td class="govuk-table__cell"><%= idea.review_date&.strftime("%e %B %Y") %></td>
-          </tr>
-        <% end %>  
-      </tbody>
-    </table>
+    <%= render 'allocated_ideas_table' %>
   </section>
 </div>
