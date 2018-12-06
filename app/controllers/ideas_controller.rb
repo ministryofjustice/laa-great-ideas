@@ -19,7 +19,9 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1
   # GET /ideas/1.json
-  def show; end
+  def show
+    @comments = Comment.where(idea_id: @idea.id)
+  end
 
   # GET /ideas/new
   def new

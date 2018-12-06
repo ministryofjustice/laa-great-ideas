@@ -71,3 +71,7 @@
   <%= button_to 'Submit idea', idea_submit_path(@idea) %>
 <% end %>
 <%= link_to 'Add Comment', new_idea_comment_path(@idea) %>
+
+<h2>Comments</h2>
+
+<%= render 'comments/comment_list', comment: @comment %>
