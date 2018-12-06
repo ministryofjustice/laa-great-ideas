@@ -38,20 +38,20 @@
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th class="govuk-table__header" scope="col">Idea ID</th>
-          <th class="govuk-table__header" scope="col">Title of Idea</th>
+          <th class="govuk-table__header" scope="col">Title</th>
           <th class="govuk-table__header" scope="col">Status</th>
           <th class="govuk-table__header" scope="col">Last Updated</th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
-      <% @ideas.each do |idea| %>
-        <tr>
-          <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
-          <td class="govuk-table__cell"><%= idea.title %></td>
-          <td class="govuk-table__cell"><%= idea.status %></td>
-          <td class="govuk-table__cell"><%= idea.updated_at.strftime("%e %B %Y") %></td>
-        </tr>
-      <% end %>
+        <% @ideas.each do |idea| %>
+          <tr>
+            <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
+            <td class="govuk-table__cell"><%= idea.title %></td>
+            <td class="govuk-table__cell"><%= idea.status %></td>
+            <td class="govuk-table__cell"><%= idea.updated_at.strftime("%e %B %Y") %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </section>
@@ -61,12 +61,20 @@
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th class="govuk-table__header" scope="col">Idea ID</th>
-          <th class="govuk-table__header" scope="col">Title of Idea</th>
-          <th class="govuk-table__header" scope="col">Initiator Name</th>
+          <th class="govuk-table__header" scope="col">Title</th>
+          <th class="govuk-table__header" scope="col">Author</th>
           <th class="govuk-table__header" scope="col">Submitted Date</th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
+        <% @ideas.each do |idea| %>
+          <tr>
+            <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
+            <td class="govuk-table__cell"><%= idea.title %></td>
+            <td class="govuk-table__cell"><%= idea.user.email %></td>
+            <td class="govuk-table__cell"><%= idea.submission_date&.strftime("%e %B %Y") %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </section>
@@ -76,13 +84,24 @@
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th class="govuk-table__header" scope="col">Idea ID</th>
-          <th class="govuk-table__header" scope="col">Title of Idea</th>
-          <th class="govuk-table__header" scope="col">Initiator Name</th>
+          <th class="govuk-table__header" scope="col">Title</th>
+          <th class="govuk-table__header" scope="col">Author</th>
           <th class="govuk-table__header" scope="col">Status</th>
           <th class="govuk-table__header" scope="col">Submitted Date</th>
           <th class="govuk-table__header" scope="col">Review Date</th>
         </tr>
-      </thead>  
+      </thead>
+      <tbody class="govuk-table__body">
+        <% @ideas.each do |idea| %>
+          <tr>
+            <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
+            <td class="govuk-table__cell"><%= idea.title %></td>
+            <td class="govuk-table__cell"><%= idea.user.email %></td>
+            <td class="govuk-table__cell"><%= idea.status %></td>
+            <td class="govuk-table__cell"><%= idea.submission_date&.strftime("%e %B %Y") %></td>
+            <td class="govuk-table__cell"><%= idea.review_date&.strftime("%e %B %Y") %></td>
+          </tr>
+        <% end %>  
       </tbody>
     </table>
   </section>
@@ -92,14 +111,24 @@
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th class="govuk-table__header" scope="col">Idea ID</th>
-          <th class="govuk-table__header" scope="col">Title of Idea</th>
-          <th class="govuk-table__header" scope="col">Initiator Name</th>
+          <th class="govuk-table__header" scope="col">Title</th>
+          <th class="govuk-table__header" scope="col">Author</th>
           <th class="govuk-table__header" scope="col">Status</th>
           <th class="govuk-table__header" scope="col">Submitted Date</th>
           <th class="govuk-table__header" scope="col">Review Date</th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
+        <% @ideas.each do |idea| %>
+          <tr>
+            <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
+            <td class="govuk-table__cell"><%= idea.title %></td>
+            <td class="govuk-table__cell"><%= idea.user.email %></td>
+            <td class="govuk-table__cell"><%= idea.status %></td>
+            <td class="govuk-table__cell"><%= idea.submission_date&.strftime("%e %B %Y") %></td>
+            <td class="govuk-table__cell"><%= idea.review_date&.strftime("%e %B %Y") %></td>
+          </tr>
+        <% end %>  
       </tbody>
     </table>
   </section>
@@ -110,7 +139,7 @@
         <tr class="govuk-table__row">
           <th class="govuk-table__header" scope="col">Idea ID</th>
           <th class="govuk-table__header" scope="col">Participation level</th>
-          <th class="govuk-table__header" scope="col">Title of Idea</th>
+          <th class="govuk-table__header" scope="col">Title</th>
           <th class="govuk-table__header" scope="col">Area of Intrest</th>
           <th class="govuk-table__header" scope="col">Status</th>
           <th class="govuk-table__header" scope="col">Submitted Date</th>
@@ -118,6 +147,17 @@
         </tr>
       </thead>
       <tbody class="govuk-table__body">
+        <% @ideas.each do |idea| %>
+          <tr>
+            <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
+            <td class="govuk-table__cell"><%= idea.participation_level %></td>
+            <td class="govuk-table__cell"><%= idea.title %></td>
+            <td class="govuk-table__cell"><%= idea.area_of_interest %></td>
+            <td class="govuk-table__cell"><%= idea.status %></td>
+            <td class="govuk-table__cell"><%= idea.submission_date&.strftime("%e %B %Y") %></td>
+            <td class="govuk-table__cell"><%= idea.review_date&.strftime("%e %B %Y") %></td>
+          </tr>
+        <% end %>  
       </tbody>
     </table>
   </section>
