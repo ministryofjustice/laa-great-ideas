@@ -46,13 +46,10 @@
       <tbody class="govuk-table__body">
       <% @ideas.each do |idea| %>
         <tr>
-          <td class="govuk-table__cell">Idea ID</td>
+          <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
           <td class="govuk-table__cell"><%= idea.title %></td>
           <td class="govuk-table__cell"><%= idea.status %></td>
           <td class="govuk-table__cell"><%= idea.updated_at.strftime("%e %B %Y") %></td>
-          <td><%= link_to 'Show', idea %></td>
-          <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
-          <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
       </tbody>
