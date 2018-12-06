@@ -25,7 +25,7 @@ RSpec.describe 'Ideas submission', type: :system do
   describe 'submitting an idea with missing data' do
     it 'should render the edit page with an error' do
       visit idea_path(idea)
-      click_button 'Submit idea'
+      click_button 'Submit'
       idea.reload
       expect(idea.submission_date).to be_nil
       expect(page).to have_text('prohibited this idea from being saved:')

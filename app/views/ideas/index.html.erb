@@ -1,51 +1,60 @@
-<p id="notice"><%= notice %></p>
+<p class="notice" id="notice"><%= notice %></p>
 
-<h1>Ideas</h1>
+  
+  <h1 class="govuk-heading-l">Home</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Area of interest</th>
-      <th>Business area</th>
-      <th>It system</th>
-      <th>Title</th>
-      <th>Idea</th>
-      <th>Benefits</th>
-      <th>Impact</th>
-      <th>Involvement</th>
-      <th>Assigned User</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @ideas.each do |idea| %>
-      <tr>
-        <td><%= idea.area_of_interest %></td>
-        <td><%= idea.business_area %></td>
-        <td><%= idea.it_system %></td>
-        <td><%= idea.title %></td>
-        <td><%= idea.idea %></td>
-        <td><%= idea.benefits %></td>
-        <td><%= idea.impact %></td>
-        <td><%= idea.involvement %></td>
-        <td><%= idea.assigned_user&.email %></td>
-        <td><%= idea.status %></td>
-        <td><%= link_to 'Show', idea %></td>
-        <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
-        <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="govuk-tabs" data-module="tabs">
+  <ul class="govuk-tabs__list">
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#my-ideas">
+        My Ideas
+      </a>
+    </li>
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab" href="#awaiting-approval">
+        Awaiting Approval
+      </a>
+    </li>
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab" href="#review-date">
+        Review Date
+      </a>
+    </li>
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab" href="#uncompleted-ideas">
+        All Uncompleted Ideas
+      </a>
+    </li>
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab" href="#allocated-ideas">
+        My Allocated Ideas
+      </a>
+    </li>
+  </ul>
 
-<br>
+  <section class="govuk-tabs__panel" id="my-ideas">
+    <h2 class="govuk-heading-l">My Ideas</h2>
+    <%= render 'my_ideas_table' %>
+  </section>
 
-<%= link_to 'New Idea', new_idea_path %>
-<% if current_user.admin? %>
-  <%= link_to 'Users', users_path %>
-  <%= link_to 'My Assigned Ideas', ideas_path(view: "assigned") %>
-  <%= link_to 'Submitted Ideas', ideas_path(view: "submitted") %>
-<% end %>
+  <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="awaiting-approval">
+    <h2 class="govuk-heading-l">Awaiting Approval</h2>
+    <%= render 'awaiting_approval_table' %>
+  </section>
 
+  <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="review-date">
+    <h2 class="govuk-heading-l">Review Date</h2>
+    <%= render 'review_date_and_uncompleted_ideas_table' %>
+  </section>
+
+  <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="uncompleted-ideas">
+    <h2 class="govuk-heading-l">All Uncompleted Ideas</h2>
+    <%= render 'review_date_and_uncompleted_ideas_table' %>
+  </section>
+
+  <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="allocated-ideas">
+    <h2 class="govuk-heading-l">My Allocated Ideas</h2>
+    <%= render 'allocated_ideas_table' %>
+  </section>
+</div>
