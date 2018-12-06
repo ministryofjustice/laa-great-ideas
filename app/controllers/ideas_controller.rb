@@ -20,7 +20,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    @comments = Comment.where(idea_id: @idea.id)
+    @idea = Idea.includes(:comments).find(params[:id])
   end
 
   # GET /ideas/new
