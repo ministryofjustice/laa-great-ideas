@@ -54,5 +54,15 @@ RSpec.describe 'Add a comment', type: :system do
         expect(page).to have_text('prohibited this comment from being saved')
       end
     end
+
+    describe 'viewing comments' do
+      it 'shows comments under the idea' do
+        idea.comments.create!(body: 'Comment 1', user: default_user)
+        idea.comments.create!(body: 'Comment 2', user: default_user)
+        visit idea_path(idea)
+        expect(page).to have_text('Comment 1')
+        expect(page).to have_text('Comment 2')
+      end
+    end
   end
 end
