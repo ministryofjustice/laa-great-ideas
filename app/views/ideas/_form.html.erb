@@ -1,79 +1,63 @@
-<%= form_with(model: idea, local: true) do |form| %>
-  <% if idea.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
-
-      <ul>
-      <% idea.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_with(model: idea, local: true) do |form| %>
+      <% if idea.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(idea.errors.count, "error") %> prohibited this idea from being saved: </h2>
+          <ul class="govuk-list">
+          <% idea.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
       <% end %>
-      </ul>
+          </ul>
+        </div>
+    <% end %>
+    <div class="govuk-form-group">
+        <%= form.label :area_of_interest, class: "govuk-label" %>            
+        <%= form.select :area_of_interest,  enum_to_select(Idea.area_of_interests), { include_blank: 'Please select' }, { class: "govuk-select" } %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :area_of_interest %>
-    <%= form.select :area_of_interest, enum_to_select(Idea.area_of_interests)%>
-  </div>
-
-  <div class="field">
-    <%= form.label :business_area %>
-    <%= form.select :business_area, enum_to_select(Idea.business_areas) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :it_system %>
-    <%= form.select :it_system, enum_to_select(Idea.it_systems) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :idea %>
-    <%= form.text_area :idea %>
-  </div>
-
-  <div class="field">
-    <%= form.label :benefits %>
-    <%= form.select :benefits, enum_to_select(Idea.benefits) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :impact %>
-    <%= form.text_area :impact %>
-  </div>
-
-  <div class="field">
-    <%= form.label :involvement %>
-    <%= form.select :involvement, enum_to_select(Idea.involvements) %>
-  </div>
-
-  <% if current_user.admin? %>
-    <div class="field">
-      <%= form.label :assigned_user_id %>
-      <%= form.collection_select(:assigned_user_id, User.all.where(:admin => true), :id, :email, :prompt => true) %>
+    <div class="govuk-form-group">
+      <%= form.label :business_area, class: "govuk-label" %>
+      <%= form.select :business_area, enum_to_select(Idea.business_areas), { include_blank: 'Please select' }, { class: "govuk-select" } %>
     </div>
-
-    <div class="field">
-      <%= form.label :participation_level %>
-      <%= form.select :participation_level, enum_to_select(Idea.participation_levels) %>
+    <div class="govuk-form-group">
+      <%= form.label :it_system, class: "govuk-label" %>
+      <%= form.select :it_system, enum_to_select(Idea.it_systems), { include_blank: 'Please select' }, { class: "govuk-select" } %>
     </div>
-
-    <div class="field">
-      <%= form.label :status %>
-      <%= form.select :status, enum_to_select(Idea.statuses) %>
+    <div class="govuk-form-group">
+      <%= form.label :title, class: "govuk-label" %>
+      <%= form.text_field :title, class: "govuk-input govuk-!-width-two-thirds form-control" %>
     </div>
-
-    <div class="field">
-      <%= form.label :review_date %>
-      <%= form.date_select :review_date %>
+    <div class="govuk-form-group">
+      <%= form.label :idea, class: "govuk-label" %>
+      <%= form.text_area :idea, class: "govuk-textarea" %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
+    <div class="govuk-form-group">
+      <%= form.label :benefits, class: "govuk-label" %>
+      <%= form.select :benefits, enum_to_select(Idea.benefits), { include_blank: 'Please select' }, { class: "govuk-select" } %>
+    </div>
+    <div class="govuk-form-group">
+      <%= form.label :impact, class: "govuk-label" %>
+      <%= form.text_area :impact, class: "govuk-input govuk-!-width-two-thirds form-control" %>
+    </div>
+    <div class="govuk-form-group">
+      <%= form.label :involvement, class: "govuk-label" %>
+      <%= form.select :involvement, enum_to_select(Idea.involvements), { include_blank: 'Please select' }, { class: "govuk-select" } %>
+    </div>
+    <% if current_user.admin? %>
+      <div class="govuk-form-group">
+        <%= form.label :assigned_user_id, class: "govuk-label" %>
+        <%= form.collection_select(:assigned_user_id, User.all.where(:admin => true), :id, :email, :prompt => true) %>
+      </div>
+      <div class="govuk-form-group">
+        <%= form.label :review_date, class: "govuk-label" %>
+        <%= form.date_field :review_date%>
+      </div>
+      <div class="govuk-form-group">
+        <%= form.label :status, class: "govuk-label" %>
+        <%= form.select :status, enum_to_select(Idea.statuses), { include_blank: 'Please select' }, { class: "govuk-select" } %>
+      </div>
+    <% end %>
+    <%= form.submit "Submit", class: "govuk-button" %>  
+    <% end %>
   </div>
-<% end %>
+</div>

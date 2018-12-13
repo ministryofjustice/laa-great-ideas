@@ -21,13 +21,13 @@ RSpec.describe 'Assign idea', type: :system do
       sign_in admin_user
       visit edit_idea_path(idea)
       expect(page).to have_select('idea_assigned_user_id')
-      expect(page).to have_select('idea_participation_level')
+      expect(page).to have_select('idea_involvement')
       select 'admin@justice.gov.uk', from: 'idea_assigned_user_id'
-      select 'Lead', from: 'idea_participation_level'
-      click_button 'Update Idea'
+      select 'I want to be involved', from: 'idea_involvement'
+      click_button 'Submit'
       idea.reload
       expect(idea.assigned_user_id).to eq(admin_user.id)
-      expect(idea.participation_level).to eq('lead')
+      expect(idea.involvement).to eq 'i_want_to_be_involved'
       expect(page).to have_text('Idea was successfully updated')
       visit ideas_path(view: 'assigned')
       expect(page).to have_text('New idea1')
