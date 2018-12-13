@@ -128,6 +128,7 @@ RSpec.describe 'Ideas', type: :request do
         expect(response.body).to include 'assigned_user_id'
         expect(response.body).to include 'status'
         expect(response.body).to include 'Involvement'
+        expect(response.body).to include 'review_date'
       end
     end
 
