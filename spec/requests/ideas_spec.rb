@@ -127,8 +127,7 @@ RSpec.describe 'Ideas', type: :request do
         get edit_idea_path(idea)
         expect(response.body).to include 'assigned_user_id'
         expect(response.body).to include 'status'
-        expect(response.body).to include 'participation_level'
-        expect(response.body).to include 'review_date'
+        expect(response.body).to include 'Involvement'
       end
     end
 
