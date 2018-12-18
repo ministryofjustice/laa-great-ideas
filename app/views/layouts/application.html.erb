@@ -83,6 +83,9 @@
 
   <div class="govuk-width-container">
     <main class="govuk-main-wrapper " id="main-content" role="main">
+      <% flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, class: name %>
+      <% end -%>
       <%= yield %>
     </main> 
 
