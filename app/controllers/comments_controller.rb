@@ -13,7 +13,11 @@ class CommentsController < ApplicationController
   def show; end
 
   def new
-    @comment = @idea.comments.build
+    if @idea.approved?
+      @comment = @idea.comments.build
+    else
+      redirect_to @idea, notice: 'Comments can only be added to approved ideas.'
+    end
   end
 
   def edit; end
@@ -32,12 +36,16 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @idea.comments.build(comment_params)
-    @comment.user = current_user
-    if @comment.save
-      redirect_to idea_comment_path(@comment.idea, @comment), notice: 'Comment created'
+    if @idea.approved?
+      @comment = @idea.comments.build(comment_params)
+      @comment.user = current_user
+      if @comment.save
+        redirect_to idea_comment_path(@comment.idea, @comment), notice: 'Comment created'
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to @idea, notice: 'Comments can only be added to approved ideas.'
     end
   end
 

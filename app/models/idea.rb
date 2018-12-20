@@ -17,6 +17,12 @@ class Idea < ApplicationRecord
     submission_date.present?
   end
 
+  def approved?
+    return false if status == 'awaiting_approval' || status.nil?
+
+    true
+  end
+
   enum benefits: %i[
     better_decision_making
     improved_reputation
