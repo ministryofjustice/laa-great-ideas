@@ -2,22 +2,20 @@
 
 require 'rails_helper'
 
-RSpec.describe NotifyMailer, type: :mailer do
-  describe 'Email' do
-    let(:user) { double('User', name: 'Test Name', email: 'test@justice.gov.uk') }
-    let(:template) { '2561a8b1-244e-41cf-90ab-51dc27d08966' }
-    let(:mail) { described_class.email_template(user) }
+RSpec.describe IdeaMailer, type: :mailer do
+  describe 'Assigned Idea Email' do
+    let(:admin_user) { build :admin }
+    let(:idea) { build :idea, title: 'New idea', assigned_user_id: admin_user.id }
+    let(:template) { '8c344764-890c-491c-9301-27cbd92a1c26' }
+    let(:mail) { described_class.assigned_idea_email_template(admin_user, idea) }
 
     it 'is a govuk_notify delivery' do
       expect(mail.delivery_method).to be_a(GovukNotifyRails::Delivery)
     end
 
-    it 'sets the recipient' do
-      expect(mail.to).to eq(['test@justice.gov.uk'])
-    end
-
     it 'sets the body' do
       expect(mail.body).to match("This is a GOV.UK Notify email with template #{template}")
+      expect(mail.body).to have_text(idea.title)
     end
 
     it 'sets the template' do

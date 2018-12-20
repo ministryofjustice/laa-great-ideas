@@ -24,6 +24,7 @@ RSpec.describe 'Assign idea', type: :system do
       expect(page).to have_select('idea_involvement')
       select 'admin@justice.gov.uk', from: 'idea_assigned_user_id'
       select 'I want to be involved', from: 'idea_involvement'
+      expect_any_instance_of(IdeaMailer).to receive(:assigned_idea_email_template).and_call_original
       click_button 'Submit'
       idea.reload
       expect(idea.assigned_user_id).to eq(admin_user.id)
