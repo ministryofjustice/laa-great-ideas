@@ -45,7 +45,7 @@ class IdeasController < ApplicationController
   def update
     old_assigned_user_id = @idea.assigned_user_id
     if @idea.update(idea_params)
-      send_assigned_user_email(old_assigned_user_id)
+      send_assigned_user_email if @idea.assigned_user_id != old_assigned_user_id
       redirect_to @idea, notice: 'Idea was successfully updated.'
     else
       render :edit
@@ -107,10 +107,8 @@ class IdeasController < ApplicationController
     end
   end
 
-  def send_assigned_user_email(old_assigned_user_id)
-    if @idea.assigned_user_id != old_assigned_user_id
-      template = '8c344764-890c-491c-9301-27cbd92a1c26'
-      mail = NotifyMailer.idea_email_template(@idea.assigned_user, @idea, template).deliver_now
-    end
+  def send_assigned_user_email
+    template = '8c344764-890c-491c-9301-27cbd92a1c26'
+    NotifyMailer.idea_email_template(@idea.assigned_user, @idea, template).deliver_now
   end
 end

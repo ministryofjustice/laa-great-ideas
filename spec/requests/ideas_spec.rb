@@ -134,10 +134,10 @@ RSpec.describe 'Ideas', type: :request do
 
     describe 'update admin fields' do
       it 'should update existing idea' do
-        patch idea_path(idea), params: { idea: { assigned_user_id: 1, status: 'approved',
+        patch idea_path(idea), params: { idea: { assigned_user_id: admin_user.id, status: 'approved',
                                                  participation_level: 'assist', review_date: Date.today } }
         idea.reload
-        expect(idea.assigned_user_id).to eq 1
+        expect(idea.assigned_user_id).to eq admin_user.id
         expect(idea.status).to eq 'approved'
         expect(idea.participation_level).to eq 'assist'
         expect(idea.review_date).to eq Date.today

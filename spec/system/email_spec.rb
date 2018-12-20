@@ -14,7 +14,7 @@ RSpec.describe 'Email', type: :system do
 
   describe 'Send an assigned idea email' do
     let(:admin_user) { build :admin }
-    let(:idea) {build :idea }
+    let(:idea) { build :idea }
     it 'should send an assigned idea email' do
       idea.assigned_user_id = admin_user.id
       template = '8c344764-890c-491c-9301-27cbd92a1c26'
