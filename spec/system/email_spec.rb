@@ -11,4 +11,17 @@ RSpec.describe 'Email', type: :system do
       expect(mail.body).to have_text('This is a GOV.UK Notify email with template')
     end
   end
+
+  describe 'Send an assigned idea email' do
+    let(:admin_user) { build :admin }
+    let(:idea) {build :idea }
+    it 'should send an assigned idea email' do
+      idea.assigned_user_id = admin_user.id
+      template = '8c344764-890c-491c-9301-27cbd92a1c26'
+      mail = NotifyMailer.idea_email_template(admin_user, idea, template).deliver_now
+      expect(mail.body).to have_text('This is a GOV.UK Notify email with template')
+      expect(mail.body).to have_text(template)
+      expect(mail.body).to have_text(idea.title)
+    end
+  end
 end
