@@ -12,6 +12,7 @@ class Idea < ApplicationRecord
   validates :benefits, presence: true, if: :submitted?
   validates :impact, presence: true, if: :submitted?
   validates :involvement, presence: true, if: :submitted?
+  after_update :send_assigned_user_email
 
   def submitted?
     submission_date.present?
@@ -96,4 +97,10 @@ class Idea < ApplicationRecord
     assist
     lead
   ]
+
+  private
+
+  def send_assigned_user_email
+    IdeaMailer.assigned_idea_email_template(assigned_user, self).deliver_now if saved_change_to_assigned_user_id?
+  end
 end
