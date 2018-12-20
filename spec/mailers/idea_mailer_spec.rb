@@ -13,6 +13,10 @@ RSpec.describe IdeaMailer, type: :mailer do
       expect(mail.delivery_method).to be_a(GovukNotifyRails::Delivery)
     end
 
+    it 'sets the recipient' do
+      expect(mail.to).to eq([admin_user.email])
+    end
+
     it 'sets the body' do
       expect(mail.body).to match("This is a GOV.UK Notify email with template #{template}")
       expect(mail.body).to have_text(idea.title)
