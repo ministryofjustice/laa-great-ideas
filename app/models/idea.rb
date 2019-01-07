@@ -17,7 +17,7 @@ class Idea < ApplicationRecord
     submission_date.present?
   end
 
-  def approved?
+  def approved_by_admin?
     return false if status == 'awaiting_approval' || status.nil?
 
     true

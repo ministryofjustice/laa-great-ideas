@@ -69,8 +69,8 @@ RSpec.describe 'Add a comment', type: :system do
 
     describe 'viewing comments' do
       it 'shows comments under the idea' do
-        approved_idea.comments.create!(body: 'Comment 1', user: default_user)
-        approved_idea.comments.create!(body: 'Comment 2', user: default_user)
+        create :comment, idea: approved_idea, body: 'Comment 1', user: default_user
+        create :comment, idea: approved_idea, body: 'Comment 2', user: default_user
         visit idea_path(approved_idea)
         expect(page).to have_text('Comment 1')
         expect(page).to have_text('Comment 2')
