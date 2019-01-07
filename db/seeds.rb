@@ -2,7 +2,6 @@
 
 require 'faker'
 
-puts 'Creating admin user admin@justice.gov.uk/change_me'
 User.create!(
   email: 'admin@justice.gov.uk',
   password: 'change_me',
@@ -10,7 +9,6 @@ User.create!(
   confirmed_at: Time.now
 )
 
-puts 'Creating normal user user@justice.gov.uk/change_me'
 User.create!(
   email: 'user@justice.gov.uk',
   password: 'change_me',
@@ -18,7 +16,6 @@ User.create!(
   confirmed_at: Time.now
 )
 
-puts 'Creating 10 normal users'
 10.times do
   User.create!(
     email: "#{Faker::Name.first_name}@justice.gov.uk",
@@ -28,7 +25,6 @@ puts 'Creating 10 normal users'
   )
 end
 
-puts 'Creating 10 admin users'
 10.times do
   User.create!(
     email: "#{Faker::Name.first_name}@justice.gov.uk",
@@ -38,7 +34,6 @@ puts 'Creating 10 admin users'
   )
 end
 
-puts 'Creating 20 submitted ideas'
 20.times do
   user = User.offset(rand(User.count)).first
   user.ideas.create!(
@@ -55,7 +50,6 @@ puts 'Creating 20 submitted ideas'
   )
 end
 
-puts 'Creating 10 unsubmitted ideas'
 10.times do
   user = User.offset(rand(User.count)).first
   user.ideas.create!(
@@ -70,7 +64,6 @@ puts 'Creating 10 unsubmitted ideas'
   )
 end
 
-puts 'Creating comment for each approved idea'
 Idea.find_each do |idea|
   if idea.approved?
     user = User.offset(rand(User.count)).first
