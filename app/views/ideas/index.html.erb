@@ -13,21 +13,25 @@
         Awaiting Approval
       </a>
     </li>
-    <li class="govuk-tabs__list-item">
-      <a class="govuk-tabs__tab" href="#review-date">
-        Review Date
-      </a>
-    </li>
+    <% if current_user&.admin? %>
+      <li class="govuk-tabs__list-item">
+        <a class="govuk-tabs__tab" href="#review-date">
+          Review Date
+        </a>
+      </li>
+    <% end %>  
     <li class="govuk-tabs__list-item">
       <a class="govuk-tabs__tab" href="#uncompleted-ideas">
         All Uncompleted Ideas
       </a>
     </li>
-    <li class="govuk-tabs__list-item">
-      <a class="govuk-tabs__tab" href="#allocated-ideas">
-        My Allocated Ideas
-      </a>
-    </li>
+    <% if current_user&.admin? %>
+      <li class="govuk-tabs__list-item">
+        <a class="govuk-tabs__tab" href="#allocated-ideas">
+          My Allocated Ideas
+        </a>
+      </li>
+    <% end %>
   </ul>
 
   <section class="govuk-tabs__panel" id="my-ideas">
