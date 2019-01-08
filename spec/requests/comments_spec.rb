@@ -6,6 +6,7 @@ RSpec.describe 'Comments', type: :request do
   let(:default_user) { build :user }
   let(:admin_user) { build :admin }
   let(:idea) { create :idea }
+  let(:approved_idea) { create :approved_idea }
   let(:comment) { create :comment }
 
   context 'As a logged in user' do
@@ -23,18 +24,37 @@ RSpec.describe 'Comments', type: :request do
       end
     end
 
-    describe 'POST /comments' do
-      it 'creates a new comment' do
-        expect do
-          post idea_comments_path(idea), params: { comment: { body: 'Test comment' } }
-        end.to change(Comment, :count).by(1)
+    context 'with an approved idea' do
+      describe 'POST /comments' do
+        it 'creates a new comment' do
+          expect do
+            post idea_comments_path(approved_idea), params: { comment: { body: 'Test comment' } }
+          end.to change(Comment, :count).by(1)
+        end
+      end
+
+      describe 'GET /comments/new' do
+        it 'returns the new comment page' do
+          get new_idea_comment_path(approved_idea)
+          expect(response.body).to include('New Comment')
+        end
       end
     end
 
-    describe 'GET /comments/new' do
-      it 'returns the new comment page' do
-        get new_idea_comment_path(idea)
-        expect(response.body).to include('New Comment')
+    context 'with an unapproved idea' do
+      describe 'POST /comments' do
+        it 'does not create a new comment' do
+          expect do
+            post idea_comments_path(idea), params: { comment: { body: 'Test comment' } }
+          end.to change(Comment, :count).by(0)
+        end
+      end
+
+      describe 'GET /comments/new' do
+        it 'redirects to idea' do
+          get new_idea_comment_path(idea)
+          expect(response).to redirect_to(idea)
+        end
       end
     end
 

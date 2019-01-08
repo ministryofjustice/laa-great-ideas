@@ -45,11 +45,12 @@ end
     idea: Faker::Simpsons.quote,
     benefits: Idea.benefits.key(rand(Idea.benefits.count)),
     impact: 'Impact',
-    involvement: Idea.involvements.key(rand(Idea.involvements.count))
+    involvement: Idea.involvements.key(rand(Idea.involvements.count)),
+    status: Idea.statuses.key(rand(Idea.statuses.count))
   )
 end
 
-20.times do
+10.times do
   user = User.offset(rand(User.count)).first
   user.ideas.create!(
     title: Faker::Book.title,
@@ -63,11 +64,12 @@ end
   )
 end
 
-100.times do
-  idea = Idea.offset(rand(Idea.count)).first
-  user = User.offset(rand(User.count)).first
-  idea.comments.create!(
-    body: Faker::ChuckNorris.fact,
-    user: user
-  )
+Idea.find_each do |idea|
+  if idea.approved?
+    user = User.offset(rand(User.count)).first
+    idea.comments.create!(
+      body: Faker::ChuckNorris.fact,
+      user: user
+    )
+  end
 end

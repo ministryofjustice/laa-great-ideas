@@ -16,6 +16,10 @@ FactoryBot.define do
 
       factory :submitted_idea do
         submission_date { Time.now }
+
+        factory :approved_idea do
+          status { Idea.statuses[:approved] }
+        end
       end
     end
   end

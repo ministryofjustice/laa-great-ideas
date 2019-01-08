@@ -68,8 +68,10 @@
 <% if @idea.status == nil %>
   <%= button_to 'Submit idea', idea_submit_path(@idea) %>
 <% end %>
-<%= link_to 'Add Comment', new_idea_comment_path(@idea) %>
+<% if @idea.approved? %>
+  <%= link_to 'Add Comment', new_idea_comment_path(@idea) %>
 
-<h2>Comments</h2>
+  <h2>Comments</h2>
 
-<%= render 'comments/comment_list', comments: @idea.comments %>
+  <%= render 'comments/comment_list', comments: @idea.comments %>
+<% end %>
