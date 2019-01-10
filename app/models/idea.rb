@@ -14,6 +14,7 @@ class Idea < ApplicationRecord
   validates :benefits, presence: true, if: :submitted?
   validates :impact, presence: true, if: :submitted?
   validates :involvement, presence: true, if: :submitted?
+  validates :review_date, future: true
   after_update :send_assigned_user_email
 
   include Votable

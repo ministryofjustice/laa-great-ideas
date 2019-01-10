@@ -49,13 +49,6 @@
         <%= form.collection_select(:assigned_user_id, User.all.where(:admin => true), :id, :email, {include_blank: 'Please select' }, { class: "govuk-select" }) %>
       </div>
       <div class="govuk-form-group">
-        <%= form.label :review_date, class: "govuk-label" %>
-        <%= form.date_field :review_date %>
-      </div>
-
-
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="review-date-hint" role="group">
           <%= form.label :review_date, class: "govuk-label" %>
           <span id="review-date-hint" class="govuk-hint">
             For example, 31 3 2019
@@ -88,8 +81,6 @@
             </div>
         </fieldset>
       </div>
-    
-
       <div class="govuk-form-group">
         <%= form.label :status, class: "govuk-label" %>
         <%= form.select :status, enum_to_select(Idea.statuses), { include_blank: 'Please select' }, { class: "govuk-select" } %>

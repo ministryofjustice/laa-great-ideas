@@ -162,5 +162,22 @@ RSpec.describe 'Ideas', type: :request do
         expect(response.body).to include 'New idea1'
       end
     end
+
+    describe 'submitting an idea with a past review date' do
+      it 'should not update existing idea' do
+        patch idea_path(idea), params: { idea: { assigned_user_id: admin_user.id, status: 'approved',
+                                                 participation_level: 'assist', review_date: Date.yesterday } }
+        expect(idea.review_date).to be_nil
+        expect(response.body).to include("Review date cannot be in the past")
+      end
+    end
+
+    describe 'submitting an idea with an invalid date' do
+      it 'should not update existing idea' do
+        patch idea_path(idea), params: { idea: { assigned_user_id: admin_user.id, status: 'approved',
+                                                 participation_level: 'assist', review_date: 'invalid date' } }
+        expect(idea.review_date).to be_nil
+      end
+    end
   end
 end
