@@ -55,7 +55,7 @@
                 <%= link_to 'New Idea', new_idea_path %>
               </a>
             </li>
-              <% if current_user&.admin? %>
+            <% if current_user&.admin? %>
               <li>
                 <%= link_to 'Users', users_path %>
               </li>
@@ -85,7 +85,7 @@
     </div>
     <main class="govuk-main-wrapper " id="main-content" role="main">
       <% flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, class: name %>
+        <%= content_tag :div, msg, class: name %>
       <% end -%>
       <%= yield %>
     </main> 
