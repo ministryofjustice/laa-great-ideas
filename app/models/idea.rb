@@ -19,7 +19,7 @@ class Idea < ApplicationRecord
   end
 
   def approved_by_admin?
-    return false if status == 'awaiting_approval' || status == 'draft'
+    return false if awaiting_approval? || draft?
 
     true
   end

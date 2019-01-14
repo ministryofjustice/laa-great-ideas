@@ -65,7 +65,7 @@
 
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>
-<% if @idea.status == 'draft' %>
+<% if @idea.draft? %>
   <%= button_to 'Submit idea', idea_submit_path(@idea) %>
 <% end %>
 <% if @idea.approved? %>
