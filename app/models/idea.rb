@@ -19,7 +19,7 @@ class Idea < ApplicationRecord
   end
 
   def approved_by_admin?
-    return false if status == 'awaiting_approval' || status.nil?
+    return false if status == 'awaiting_approval' || status == 'draft'
 
     true
   end
@@ -97,6 +97,7 @@ class Idea < ApplicationRecord
     interim_benefits
     benefits_realised
     not_proceeding
+    draft
   ]
 
   enum participation_level: %i[

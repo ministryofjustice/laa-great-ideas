@@ -38,6 +38,7 @@ RSpec.describe 'Ideas', type: :request do
         end.to change(Idea, :count).by(1)
 
         expect(response).to have_http_status(302)
+        expect(idea.status).to eq 'draft'
       end
     end
 

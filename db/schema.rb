@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_095926) do
+ActiveRecord::Schema.define(version: 2019_01_14_094201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_095926) do
     t.integer "user_id"
     t.datetime "submission_date"
     t.integer "assigned_user_id"
-    t.integer "status"
+    t.integer "status", default: 7
     t.date "review_date"
     t.integer "participation_level"
     t.index ["assigned_user_id"], name: "index_ideas_on_assigned_user_id"
