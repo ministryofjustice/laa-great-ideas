@@ -46,7 +46,7 @@ docker-compose up
 ```
 In new terminal window:
 
-`docker-compose run app rake db:reset`
+`docker-compose run app bundle exec rake db:reset`
 
 ## Contributing
 
