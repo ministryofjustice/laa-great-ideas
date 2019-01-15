@@ -17,6 +17,10 @@ test:
   <<: *default
   database: laa-great-ideas_test
 
+uat:
+  <<: *default
+  database: <%= ENV.fetch("DB_NAME", "laa-great-ideas_uat") %>
+
 production:
   <<: *default
   database: laa-great-ideas_production

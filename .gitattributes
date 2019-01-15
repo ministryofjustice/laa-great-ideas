@@ -1,0 +1,1 @@
+kubectl_deploy/laa-great-ideas/values-*.yaml filter=git-crypt diff=git-crypt
