@@ -24,8 +24,7 @@ $govuk-global-styles: true;
 
 ul#navigation li {
   display: inline;
-  color: white;
 }
-.govuk-header__navigation-item--active {
+nav#navbanner a {
   color: #ffffff;
 }
