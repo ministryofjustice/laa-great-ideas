@@ -53,22 +53,24 @@
             </li>
             <li class="govuk-header__navigation-item">
               <a class="govuk-header__link" href="#2">
-                <%= link_to 'New Idea', new_idea_path %>
+               <% if current_user %>
+                 <%= link_to 'New Idea', new_idea_path %>
+               <% end %>
               </a>
             </li>
             <% if current_user&.admin? %>
               <li>
                 <%= link_to 'Users', users_path %>
               </li>
-              <li>        
+              <li>
                 <%= link_to 'My Assigned Ideas', ideas_path(view: "assigned") %>
               </li>
               <li>
                 <%= link_to 'Submitted Ideas', ideas_path(view: "submitted") %>
               </li>
             <% end %>
-          </ul> 
-        </nav>    
+          </ul>
+        </nav>
       </div>
     </div>
   </header>
@@ -89,7 +91,7 @@
         <%= content_tag :div, msg, class: name %>
       <% end -%>
       <%= yield %>
-    </main> 
+    </main>
   </div>
   <footer class="govuk-footer " role="contentinfo">
     <div class="govuk-width-container ">
