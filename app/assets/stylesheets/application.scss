@@ -21,3 +21,11 @@ $govuk-global-styles: true;
 
 @import "govuk-frontend/all";
 @import "*";
+
+ul#navigation li {
+  display: inline;
+  color: white;
+}
+.govuk-header__navigation-item--active {
+  color: #ffffff;
+}
