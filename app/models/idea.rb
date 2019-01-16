@@ -109,6 +109,21 @@ class Idea < ApplicationRecord
     lead
   ]
 
+  def review_year
+    review_date.strftime('%Y')
+  rescue
+  end
+        
+  def review_month
+    review_date.strftime('%m')
+  rescue
+  end
+  
+  def review_day
+    review_date.strftime('%d')
+  rescue
+  end
+
   private
 
   def send_assigned_user_email
