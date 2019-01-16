@@ -57,7 +57,11 @@
         <%= form.select :status, enum_to_select(Idea.statuses), { include_blank: 'Please select' }, { class: "govuk-select" } %>
       </div>
     <% end %>
-    <%= form.submit "Submit", class: "govuk-button" %>  
+    <% if idea.new_record? %>
+      <%= form.submit "Create Idea", class: "govuk-button" %>
+    <% else %>
+      <%= form.submit "Update Idea", class: "govuk-button" %>
+    <% end %>
     <% end %>
   </div>
 </div>
