@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2019_01_14_094201) do
     t.integer "user_id"
     t.datetime "submission_date"
     t.integer "assigned_user_id"
-    t.integer "status", default: Idea.statuses[:draft]
+    t.integer "status", default: 0
     t.date "review_date"
     t.integer "participation_level"
     t.index ["assigned_user_id"], name: "index_ideas_on_assigned_user_id"

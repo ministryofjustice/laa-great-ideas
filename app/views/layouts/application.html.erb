@@ -42,7 +42,7 @@
         <a href="/" class="govuk-header__link govuk-header__link--service-name">
           Great Ideas
         </a>
-        <nav>
+        <nav id="navbanner">
           <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
             <li class="govuk-header__navigation-item govuk-header__navigation-item--active">
               <a class="govuk-header__link" href="#1">
@@ -51,7 +51,7 @@
                 <% end %>
               </a>
             </li>
-            <li class="govuk-header__navigation-item">
+            <li class="govuk-header__navigation-item govuk-header__navigation-item--active">
               <a class="govuk-header__link" href="#2">
                <% if current_user %>
                  <%= link_to 'New Idea', new_idea_path %>
@@ -59,14 +59,21 @@
               </a>
             </li>
             <% if current_user&.admin? %>
-              <li>
-                <%= link_to 'Users', users_path %>
+              <li class="govuk-header__navigation-item govuk-header__navigation-item--active">
+                <a class="govuk-header__link" href="#3">
+                 <%= link_to 'Users', users_path %>
+                </a>
               </li>
-              <li>
-                <%= link_to 'My Assigned Ideas', ideas_path(view: "assigned") %>
+              <li class="govuk-header__navigation-item govuk-header__navigation-item--active">
+                <a class="govuk-header__link" href="#3">
+                 <%= link_to 'My Assigned Ideas', ideas_path(view: "assigned") %>
+                </a>
+
               </li>
-              <li>
-                <%= link_to 'Submitted Ideas', ideas_path(view: "submitted") %>
+              <li class="govuk-header__navigation-item govuk-header__navigation-item--active">
+                <a class="govuk-header__link" href="#3">
+                  <%= link_to 'Submitted Ideas', ideas_path(view: "submitted") %>
+                </a>
               </li>
             <% end %>
           </ul>
