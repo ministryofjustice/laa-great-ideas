@@ -1,22 +1,24 @@
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Created: </strong>
-  <%= @user.created_at %>
-</p>
-
-<p>
-  <strong>Last Updated:</strong>
-  <%= @user.updated_at%>
-</p>
-
-<p>
-  <strong>Admin:</strong>
-  <%= @user.admin %>
-</p>
-
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <table class="govuk-table">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="row">Email:</th>
+        <td class="govuk-table__cell"><%= @user.email %></td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="row">Created at:</th>
+        <td class="govuk-table__cell"><%= @user.created_at&.strftime("%e %B %Y") %></td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="row">Last Updated:</th>
+        <td class="govuk-table__cell"><%= @user.updated_at&.strftime("%e %B %Y") %></td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="row">Admin:</th>
+        <td class="govuk-table__cell"><%= @user.admin %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<%= button_to 'Toggle Admin', user_toggle_admin_path(@user), class: "govuk-button" %>
 <%= link_to 'Back', users_path %>
-<%= button_to 'Toggle Admin', user_toggle_admin_path(@user) %>
