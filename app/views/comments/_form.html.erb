@@ -18,6 +18,12 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+
+    <% if comment.new_record? %>
+      <%= form.submit "Create Comment", class: "govuk-button" %>
+    <% else %>
+      <%= form.submit "Update Comment", class: "govuk-button" %>
+    <% end %>
+
   </div>
 <% end %>
