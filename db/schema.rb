@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_14_094201) do
+ActiveRecord::Schema.define(version: 2019_01_18_145417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2019_01_14_094201) do
     t.integer "user_id"
     t.datetime "submission_date"
     t.integer "assigned_user_id"
-    t.integer "status", default: Idea.statuses[:draft] 
+    t.integer "status", default: Idea.statuses[:draft]
     t.date "review_date"
     t.integer "participation_level"
     t.index ["assigned_user_id"], name: "index_ideas_on_assigned_user_id"
@@ -64,6 +64,18 @@ ActiveRecord::Schema.define(version: 2019_01_14_094201) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "idea_id"
+    t.bigint "user_id"
+    t.index ["idea_id", "user_id"], name: "index_votes_on_idea_id_and_user_id", unique: true
+    t.index ["idea_id"], name: "index_votes_on_idea_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
   add_foreign_key "comments", "ideas"
   add_foreign_key "comments", "users"
+  add_foreign_key "votes", "ideas"
+  add_foreign_key "votes", "users"
 end

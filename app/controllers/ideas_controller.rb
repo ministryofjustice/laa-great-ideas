@@ -3,6 +3,7 @@
 class IdeasController < ApplicationController
   before_action :authenticate_user!
   before_action :set_idea, only: %i[show edit update destroy submit]
+  before_action :set_vote, only: %i[show]
 
   # GET /ideas
   # GET /ideas.json
@@ -66,11 +67,20 @@ class IdeasController < ApplicationController
     end
   end
 
+  def current_user_has_voted_on_idea?
+    @vote.any?
+  end
+  helper_method :current_user_has_voted_on_idea?
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_idea
     @idea = Idea.find(params[:id] || params[:idea_id])
+  end
+
+  def set_vote
+    @vote = Vote.where('idea_id = ? AND user_id = ?', @idea, current_user)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
