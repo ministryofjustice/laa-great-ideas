@@ -1,26 +1,25 @@
-<table>
-  <thead>
-    <tr>
-      <th>Comment</th>
-      <th>Author</th>
-      <th>Idea</th>
-      <th>Status at time of comment</th>
-      <th>Created at</th>
-     <th colspan="3"></th>
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header">Comment</th>
+      <th class="govuk-table__header">Author</th>
+      <th class="govuk-table__header">Idea</th>
+      <th class="govuk-table__header">Status at time of comment</th>
+      <th class="govuk-table__header">Created at</th>
+     <th  class="govuk-table__header" colspan="3"></th>
     </tr>
   </thead>
-
-  <tbody>
+  <tbody class="govuk-table__body">
     <% comments.each do |comment| %>
-      <tr>
-        <td><%= comment.body %></td>
-        <td><%= comment.user_id %></td>
-        <td><%= comment.idea_id %></td>
-        <td><%= comment.status_at_comment_time %></td>
-        <td><%= comment.created_at %></td>
-        <td><%= link_to 'Show', idea_comment_path(comment.idea, comment) %></td>
-        <td><%= link_to 'Edit', edit_idea_comment_path(comment.idea, comment) %></td>
-        <td><%= link_to 'Destroy', idea_comment_path(comment.idea, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><%= comment.body %></td>
+        <td class="govuk-table__cell"><%= comment.user_id %></td>
+        <td class="govuk-table__cell"><%= comment.idea_id %></td>
+        <td class="govuk-table__cell"><%= comment.status_at_comment_time %></td>
+        <td class="govuk-table__cell"><%= comment.created_at %></td>
+        <td class="govuk-table__cell"><%= link_to 'Show', idea_comment_path(comment.idea, comment) %></td>
+        <td class="govuk-table__cell"><%= link_to 'Edit', edit_idea_comment_path(comment.idea, comment) %></td>
+        <td class="govuk-table__cell"><%= link_to 'Destroy', idea_comment_path(comment.idea, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,23 +1,16 @@
-<p>
-  <strong>Comment:<strong>
-  <br/>
-  <%= @comment.body %>
-</p>
-
-<p>
-  <strong>User ID:</strong>
-  <%= @comment.user_id %>
-</p>
-
-<p>
-  <strong>Status at comment time:</strong>
-  <%= @comment.status_at_comment_time %>
-</p>
-
-<p>
-  <strong>Created at:</strong>
-  <%= @comment.created_at %>
-</p>
-
+<table class="govuk-table">
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Comment:</th>
+    <td class="govuk-table__cell"><%= @comment.body %></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">User ID:</th>
+    <td class="govuk-table__cell"><%= @comment.user_id%></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Status at comment time:</th>
+    <td class="govuk-table__cell"><%= @comment.status_at_comment_time %></td>
+  </tr>
+</table>
 <%= link_to 'Edit', edit_idea_comment_path(@comment.idea, @comment) %> |
 <%= link_to 'Back', idea_path(@comment.idea) %>

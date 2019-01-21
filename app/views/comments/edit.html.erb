@@ -1,6 +1,6 @@
-<h1>Editing Comment</h1>
+<h1 class="govuk-heading-l">Editing Comment</h1>
 
 <%= render 'form', comment: @comment %>
 
-<%= link_to 'Show', idea_comment_path(@comment.idea, @comment) %> |
+<%= link_to 'Show', idea_comment_path(@comment.idea, @comment) %>
 <%= link_to 'Back', idea_path(@comment.idea_id) %>
