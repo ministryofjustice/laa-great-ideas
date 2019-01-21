@@ -1,29 +1,24 @@
 <%= form_with(model: comment, url: [@idea, comment]) do |form| %>
   <% if comment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-      <ul>
+      <h2 class="govuk-heading-l"><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <ul class="govuk-list">
       <% comment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label 'Comment:' %>
+  <div class="govuk-form-group">
+    <%= form.label 'Comment:', class: "govuk-label" %>
     <br/>
-    <%= form.text_area :body %>
+    <%= form.text_area :body, class: "govuk-textarea" %>
   </div>
-
   <div class="actions">
-
     <% if comment.new_record? %>
       <%= form.submit "Create Comment", class: "govuk-button" %>
     <% else %>
       <%= form.submit "Update Comment", class: "govuk-button" %>
     <% end %>
-
   </div>
 <% end %>

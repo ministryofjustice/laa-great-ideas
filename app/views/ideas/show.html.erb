@@ -1,68 +1,69 @@
 <table class="govuk-table">
   <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Area of Intrest:</th>
-        <td class="govuk-table__cell"><%= @idea.area_of_interest%></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Business Area:</th>
-        <td class="govuk-table__cell"><%= @idea.business_area %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">It System:</th>
-        <td class="govuk-table__cell"><%= @idea.it_system %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Title:</th>
-        <td class="govuk-table__cell"><%= @idea.title %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Idea:</th>
-        <td class="govuk-table__cell"><%= @idea.idea %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Benefits:</th>
-        <td class="govuk-table__cell"><%= @idea.benefits %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Impact:</th>
-        <td class="govuk-table__cell"><%= @idea.impact %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Involvement: </th>
-        <td class="govuk-table__cell"><%= @idea.involvement %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Submission Date:</th>
-        <td class="govuk-table__cell"><%= @idea.submission_date&.strftime("%e %B %Y") %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Assigned User:</th>
-        <td class="govuk-table__cell"><%= @idea.assigned_user %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Participation Level </th>
-        <td class="govuk-table__cell"><%= @idea.participation_level%></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Status:</th>
-        <td class="govuk-table__cell"><%= @idea.status%></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row">Review Date:</th>
-        <td class="govuk-table__cell"><%= @idea.review_date&.strftime("%e %B %Y") %></td>
-      </tr>
+    <th class="govuk-table__header" scope="row">Area of Intrest:</th>
+    <td class="govuk-table__cell"><%= @idea.area_of_interest%></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Business Area:</th>
+    <td class="govuk-table__cell"><%= @idea.business_area %></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">It System:</th>
+    <td class="govuk-table__cell"><%= @idea.it_system %></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Title:</th>
+    <td class="govuk-table__cell"><%= @idea.title %></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Idea:</th>
+    <td class="govuk-table__cell"><%= @idea.idea %></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Benefits:</th>
+    <td class="govuk-table__cell"><%= @idea.benefits %></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Impact:</th>
+    <td class="govuk-table__cell"><%= @idea.impact %></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Involvement: </th>
+    <td class="govuk-table__cell"><%= @idea.involvement %></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Submission Date:</th>
+    <td class="govuk-table__cell"><%= @idea.submission_date&.strftime("%e %B %Y") %></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Assigned User:</th>
+    <td class="govuk-table__cell"><%= @idea.assigned_user %></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Participation Level </th>
+    <td class="govuk-table__cell"><%= @idea.participation_level%></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Status:</th>
+    <td class="govuk-table__cell"><%= @idea.status%></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Review Date:</th>
+    <td class="govuk-table__cell"><%= @idea.review_date&.strftime("%e %B %Y") %></td>
+  </tr>
 </table>
 <%= link_to 'Edit', edit_idea_path(@idea), class: "govuk-button" %>
-</br>
+  <p class="govuk-body"></p>
 <%= link_to 'Back', ideas_path %>
 <% if @idea.draft? %>
   <%= button_to 'Submit idea', idea_submit_path(@idea), class: "govuk-button" %>
 <% end %>
+  <p class="govuk-body"></p>
 <% if @idea.approved? %>
   <%= link_to 'Add Comment', new_idea_comment_path(@idea), class: "govuk-button" %>
-
-  <h2>Comments</h2>
-<table class="govuk-table">
-  <%= render 'comments/comment_list', comments: @idea.comments %>
-</table>
+  <h3 class="govuk-heading-m">Comments</h3>
+  <p class="govuk-body"></p>
+  <table class="govuk-table">
+    <%= render 'comments/comment_list', comments: @idea.comments %>
+  </table>
 <% end %>
