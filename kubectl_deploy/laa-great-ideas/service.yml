@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: laa-great-ideas
+  labels:
+    app: laa-great-ideas
+spec:
+  ports:
+  - port: 3000
+    name: http
+    targetPort: 3000
+  selector:
+    app: laa-great-ideas
