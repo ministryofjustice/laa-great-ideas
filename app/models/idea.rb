@@ -111,18 +111,15 @@ class Idea < ApplicationRecord
   ]
 
   def review_year
-    review_date.strftime('%Y')
-  rescue
+    review_date&.strftime('%Y')
   end
-        
+
   def review_month
-    review_date.strftime('%m')
-  rescue
+    review_date&.strftime('%m')
   end
-  
+
   def review_day
-    review_date.strftime('%d')
-  rescue
+    review_date&.strftime('%d')
   end
 
   private
