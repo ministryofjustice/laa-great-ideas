@@ -62,11 +62,11 @@
 <% if @idea.approved_by_admin? %>
   <p>
     <strong>Votes</strong>
-    <%= Vote.where(idea_id: @idea).count %>
+    <%= @idea.votes.count %>
   </p>
   
-  <% if current_user_has_voted_on_idea? %>
-    <%= button_to 'Remove Vote', idea_vote_path(@idea, @vote.first.id), method: :delete %>
+  <% if @idea.user_voted?(current_user) %>
+    <%= button_to 'Remove Vote', idea_vote_path(@idea, @vote.id), method: :delete %>
   <% else %>
     <%= button_to 'Vote', idea_votes_path(@idea) %>
   <% end %>

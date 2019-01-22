@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'Relations' do
     it { should have_many(:ideas) }
+    it { should have_many(:votes) }
   end
 
   describe 'Validations' do

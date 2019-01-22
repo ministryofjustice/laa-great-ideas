@@ -12,7 +12,7 @@ class VotesController < ApplicationController
     @vote = @idea.votes.build
     @vote.user = current_user
     @vote.save
-    redirect_to @idea
+    redirect_to @idea, notice: 'Your vote has been added'
   end
 
   def destroy
@@ -20,11 +20,11 @@ class VotesController < ApplicationController
     return if performed?
 
     @vote.destroy
-    redirect_to @idea
+    redirect_to @idea, notice: 'Your vote has been removed'
   end
 
   def set_vote
-    @vote = Vote.find(params[:id] || params[:vote_id])
+    @vote = Vote.find(params[:id])
   end
 
   def set_idea

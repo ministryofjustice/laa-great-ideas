@@ -16,6 +16,8 @@ class Idea < ApplicationRecord
   validates :involvement, presence: true, if: :submitted?
   after_update :send_assigned_user_email
 
+  include Votable
+
   def submitted?
     submission_date.present?
   end

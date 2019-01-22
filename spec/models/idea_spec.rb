@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe Idea, type: :model do
   describe 'relations' do
     it { should belong_to(:user) }
+    it { should have_many(:votes) }
   end
 
   describe 'validations' do

@@ -8,9 +8,7 @@ RSpec.describe 'Add a vote', type: :system do
   let(:approved_idea) { create :approved_idea }
 
   context 'a logged in user' do
-    before do
-      sign_in default_user
-    end
+    before { sign_in default_user }
 
     context 'with an approved idea' do
       describe 'on the idea show page' do

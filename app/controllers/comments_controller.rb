@@ -51,7 +51,7 @@ class CommentsController < ApplicationController
   end
 
   def set_idea
-    @idea = Idea.find(params[:idea_id])
+    @idea = Idea.includes(:votes).find(params[:idea_id])
   end
 
   def comment_params
