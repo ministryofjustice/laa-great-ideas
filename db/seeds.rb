@@ -65,11 +65,23 @@ end
 end
 
 Idea.find_each do |idea|
-  if idea.approved?
+  if idea.approved_by_admin?
     user = User.offset(rand(User.count)).first
     idea.comments.create!(
       body: Faker::ChuckNorris.fact,
       user: user
     )
+  end
+end
+
+puts 'Adding votes'
+3.times do
+  Idea.find_each do |idea|
+    if idea.approved_by_admin? && [true, false].sample
+      user = User.offset(rand(User.count)).first
+      idea.votes.create!(
+        user: user
+      )
+    end
   end
 end

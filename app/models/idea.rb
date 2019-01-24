@@ -4,6 +4,8 @@ class Idea < ApplicationRecord
   belongs_to :user
   belongs_to :assigned_user, class_name: 'User', optional: true
   has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy
+
   validates :title, presence: true
   validates :area_of_interest, presence: true, if: :submitted?
   validates :business_area, presence: true, if: :submitted?
@@ -13,6 +15,8 @@ class Idea < ApplicationRecord
   validates :impact, presence: true, if: :submitted?
   validates :involvement, presence: true, if: :submitted?
   after_update :send_assigned_user_email
+
+  include Votable
 
   def submitted?
     submission_date.present?
