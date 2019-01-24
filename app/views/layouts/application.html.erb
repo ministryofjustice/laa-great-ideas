@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="govuk-template ">
   <head>
-    <title><%= yield(:title) %>LAA Great Ideas</title>
+    <title><%= content_for?(:title) ? "#{yield(:title)} - LAA Great Ideas" : 'LAA Great Ideas' %> </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
