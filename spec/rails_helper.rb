@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start unless ENV['NO_COVERAGE']
 SimpleCov.minimum_coverage 100
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
