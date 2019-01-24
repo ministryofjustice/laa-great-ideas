@@ -59,17 +59,20 @@
   <%= button_to 'Submit idea', idea_submit_path(@idea), class: "govuk-button" %>
 <% end %>
   <p class="govuk-body"></p>
+
 <% if @idea.approved_by_admin? %>
   <p>
     <strong>Votes</strong>
     <%= @idea.votes.count %>
   </p>
-  
   <% if @idea.user_voted?(current_user) %>
     <%= button_to 'Remove Vote', idea_vote_path(@idea, @vote.id), method: :delete %>
   <% else %>
     <%= button_to 'Vote', idea_votes_path(@idea) %>
   <% end %>
+<% end %>
+
+<% if user_can_comment?(@idea, current_user) %>
   <%= link_to 'Add Comment', new_idea_comment_path(@idea), class: "govuk-button" %>
   <h3 class="govuk-heading-m">Comments</h3>
   <p class="govuk-body"></p>

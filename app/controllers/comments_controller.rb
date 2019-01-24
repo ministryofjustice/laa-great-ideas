@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  include CommentsHelper
   before_action :authenticate_user!
   before_action :set_comment, only: %i[show edit update destroy]
   before_action :set_idea, only: %i[new create show edit update destroy]
@@ -13,7 +14,7 @@ class CommentsController < ApplicationController
   def show; end
 
   def new
-    redirect_to @idea, notice: 'Comments can only be added to approved ideas.' unless @idea.approved_by_admin?
+    redirect_to @idea, notice: 'You cannot create a comment on this idea' unless user_can_comment?(@idea, current_user)
     return if performed?
 
     @comment = @idea.comments.build
@@ -35,7 +36,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    redirect_to @idea, notice: 'Comments can only be added to approved ideas.' unless @idea.approved_by_admin?
+    redirect_to @idea, notice: 'You cannot create a comment on this idea' unless user_can_comment?(@idea, current_user)
     return if performed?
 
     @comment = @idea.comments.build(comment_params)

@@ -7,12 +7,11 @@ RSpec.describe 'Comments', type: :request do
   let(:admin_user) { build :admin }
   let(:idea) { create :idea }
   let(:approved_idea) { create :approved_idea }
+  let(:not_proceeding_idea) { create :idea, status: Idea.statuses[:not_proceeding] }
   let(:comment) { create :comment }
 
   context 'As a logged in user' do
-    before do
-      sign_in default_user
-    end
+    before { sign_in default_user }
 
     describe 'GET /comments' do
       it 'returns a list of comments' do
@@ -39,6 +38,32 @@ RSpec.describe 'Comments', type: :request do
           expect(response.body).to include('New Comment')
         end
       end
+
+      describe 'GET /comment/:id' do
+        it 'shows the comment' do
+          get idea_comment_path(comment.idea, comment)
+          expect(response.body).to include('Comment 1')
+        end
+      end
+
+      describe 'DELETE /comment' do
+        it 'deletes the comment' do
+          delete idea_comment_path(comment.idea, comment)
+          expect(Comment.exists?(comment.id)).to eq false
+        end
+      end
+
+      describe 'PATCH /comment' do
+        it 'updates a comment' do
+          patch idea_comment_path(comment.idea, comment), params: { comment: { body: 'Changed comment' } }
+          comment.reload
+          expect(comment.body).to eq('Changed comment')
+        end
+
+        it 'fails to updates a comment if parameters missing' do
+          expect { patch idea_comment_path(comment.idea, comment) } .to raise_error(ActionController::ParameterMissing)
+        end
+      end
     end
 
     context 'with an unapproved idea' do
@@ -58,29 +83,41 @@ RSpec.describe 'Comments', type: :request do
       end
     end
 
-    describe 'GET /comment/:id' do
-      it 'shows the comment' do
-        get idea_comment_path(comment.idea, comment)
-        expect(response.body).to include('Comment 1')
+    context 'with a not_proceeding idea' do
+      describe 'POST /comments' do
+        it 'does not create a new comment' do
+          expect do
+            post idea_comments_path(not_proceeding_idea), params: { comment: { body: 'Test comment' } }
+          end.to change(Comment, :count).by(0)
+        end
+      end
+
+      describe 'GET /comments/new' do
+        it 'redirects to idea' do
+          get new_idea_comment_path(not_proceeding_idea)
+          expect(response).to redirect_to(not_proceeding_idea)
+        end
       end
     end
+  end
 
-    describe 'DELETE /comment' do
-      it 'deletes the comment' do
-        delete idea_comment_path(comment.idea, comment)
-        expect(Comment.exists?(comment.id)).to eq false
+  context 'As an admin user' do
+    before { sign_in admin_user }
+
+    context 'with a not proceeding idea' do
+      describe 'POST /comments' do
+        it 'creates a new comment' do
+          expect do
+            post idea_comments_path(not_proceeding_idea), params: { comment: { body: 'Test comment' } }
+          end.to change(Comment, :count).by(1)
+        end
       end
-    end
 
-    describe 'PATCH /comment' do
-      it 'updates a comment' do
-        patch idea_comment_path(comment.idea, comment), params: { comment: { body: 'Changed comment' } }
-        comment.reload
-        expect(comment.body).to eq('Changed comment')
-      end
-
-      it 'fails to updates a comment if parameters missing' do
-        expect { patch idea_comment_path(comment.idea, comment) } .to raise_error(ActionController::ParameterMissing)
+      describe 'GET /comments/new' do
+        it 'returns the new comment page' do
+          get new_idea_comment_path(not_proceeding_idea)
+          expect(response.body).to include('New Comment')
+        end
       end
     end
   end
