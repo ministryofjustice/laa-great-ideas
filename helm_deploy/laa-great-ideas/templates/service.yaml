@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "laa-great-ideas.fullname" . }}
+  labels:
+    name: {{ include "laa-great-ideas.name" . }}
+    app: {{ include "laa-great-ideas.name" . }}
+    chart: {{ include "laa-great-ideas.chart" . }}
+    instance: {{ .Release.Name }}
+    managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ include "laa-great-ideas.name" . }}
+    release: {{ .Release.Name }}

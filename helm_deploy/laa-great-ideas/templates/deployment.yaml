@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "laa-great-ideas.fullname" . }}
+  labels:
+    name: {{ include "laa-great-ideas.name" . }}
+    helm.sh/chart: {{ include "laa-great-ideas.chart" . }}
+    instance: {{ .Release.Name }}
+    managed-by: {{ .Release.Service }}
+    name: {{ include "laa-great-ideas.name" . }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      name: {{ include "laa-great-ideas.name" . }}
+      instance: {{ .Release.Name }}
+      app: {{ include "laa-great-ideas.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        name: {{ include "laa-great-ideas.name" . }}
+        instance: {{ .Release.Name }}
+        app: {{ include "laa-great-ideas.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: laa-great-ideas-rds-instance-output
+                  key: database_username
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: laa-great-ideas-rds-instance-output
+                  key: database_password
+
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: laa-great-ideas-rds-instance-output
+                  key: rds_instance_address
+            
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: laa-great-ideas-rds-instance-output
+                  key: database_name
+            
+            - name: SECRET_KEY_BASE
+              valueFrom: 
+                secretKeyRef:
+                  name: app-secrets
+                  key: secret_key_base
+            
+            - name: RAILS_ENV
+              value: uat
+            
+            - name: RAILS_LOG_TO_STDOUT
+              value: log
+            
+            - name: RAILS_SERVE_STATIC_FILES
+              value: present
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
