@@ -79,9 +79,11 @@ puts 'Adding votes'
   Idea.find_each do |idea|
     if idea.approved_by_admin? && [true, false].sample
       user = User.offset(rand(User.count)).first
-      idea.votes.create!(
-        user: user
-      )
+      unless idea.user_voted?(user)
+        idea.votes.create!(
+          user: user
+        )
+      end
     end
   end
 end

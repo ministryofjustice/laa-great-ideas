@@ -69,17 +69,27 @@ spec:
             - name: SECRET_KEY_BASE
               valueFrom: 
                 secretKeyRef:
-                  name: app-secrets
+                  name: {{ include "laa-great-ideas.fullname" . }}
                   key: secret_key_base
             
+            - name: APP_HOST
+              value: {{ index .Values.ingress.hosts 0 }}
+
             - name: RAILS_ENV
-              value: uat
+              value: {{ .Values.rails.rails_env }}
             
             - name: RAILS_LOG_TO_STDOUT
               value: log
             
             - name: RAILS_SERVE_STATIC_FILES
               value: present
+            
+            - name: GOVUK_NOTIFY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "laa-great-ideas.fullname" . }}
+                  key: govuk_notify_api_key
+
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
