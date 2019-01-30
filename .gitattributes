@@ -1,1 +1,6 @@
 kubectl_deploy/laa-great-ideas/values-*.yaml filter=git-crypt diff=git-crypt
+kubectl_deploy/laa-great-ideas/values.yaml filter=git-crypt diff=git-crypt
+kubectl_deploy/laa-great-ideas/secrets.yaml filter=git-crypt diff=git-crypt
+helm_deploy/laa-great-ideas/values-*.yaml filter=git-crypt diff=git-crypt
+helm_deploy/laa-great-ideas/values.yaml filter=git-crypt diff=git-crypt
+helm_deploy/laa-great-ideas/secrets.yaml filter=git-crypt diff=git-crypt

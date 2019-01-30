@@ -23,4 +23,4 @@ uat:
 
 production:
   <<: *default
-  database: laa-great-ideas_production
+  database: <%= ENV.fetch("DB_NAME", "laa-great-ideas_production") %>
