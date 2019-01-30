@@ -27,7 +27,7 @@ RSpec.describe 'Update review date', type: :system do
       fill_in('idea_review_day', with: '')
       click_button 'Update Idea'
       idea.reload
-      expect(idea.review_date).to be_nil
+      expect(idea.review_date).to eq(nil)
       expect(page).to have_text('Idea was successfully updated')
     end
 

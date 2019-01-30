@@ -15,9 +15,14 @@ class Idea < ApplicationRecord
   validates :impact, presence: true, if: :submitted?
   validates :involvement, presence: true, if: :submitted?
   validates :review_date, future: true
+  before_validation :update_review_date
   after_update :send_assigned_user_email
 
+<<<<<<< HEAD
   include Votable
+=======
+  attr_writer :review_year, :review_month, :review_day
+>>>>>>> d731d5b... Make changes requested in pr
 
   def submitted?
     submission_date.present?
@@ -126,5 +131,18 @@ class Idea < ApplicationRecord
 
   def send_assigned_user_email
     IdeaMailer.assigned_idea_email_template(assigned_user, self).deliver_now if saved_change_to_assigned_user_id?
+  end
+
+  def update_review_date
+    if !@review_year.blank? || !@review_month.blank? || !@review_day.blank?
+      begin
+        date_str = "#{@review_year}-#{@review_month}-#{@review_day}"
+        self.review_date = Date.parse(date_str)
+      rescue ArgumentError
+        errors.add(:review_date, 'must be a valid date')
+      end
+    else
+      self.review_date = nil
+    end
   end
 end

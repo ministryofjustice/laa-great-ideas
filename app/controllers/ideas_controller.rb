@@ -44,8 +44,10 @@ class IdeasController < ApplicationController
 
   # PATCH/PUT /ideas/1
   def update
-    new_params = update_review_date idea_params
-    if @idea.errors[:review_date].none? && @idea.update(new_params)
+    @idea.review_year = idea_params[:review_year]
+    @idea.review_month = idea_params[:review_month]
+    @idea.review_day = idea_params[:review_day]
+    if @idea.update(idea_params) && @idea.errors[:review_date].none?
       redirect_to @idea, notice: 'Idea was successfully updated.'
     else
       render :edit
