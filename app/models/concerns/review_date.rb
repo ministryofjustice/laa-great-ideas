@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ReviewDate
+  attr_writer :review_year, :review_month, :review_day
+
   def review_year
     review_date&.strftime('%Y')
   end
