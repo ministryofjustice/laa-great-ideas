@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Idea < ApplicationRecord
+  include ReviewDate, Votable
   belongs_to :user
   belongs_to :assigned_user, class_name: 'User', optional: true
   has_many :comments, dependent: :destroy
@@ -17,12 +18,6 @@ class Idea < ApplicationRecord
   validates :review_date, future: true
   before_validation :update_review_date
   after_update :send_assigned_user_email
-
-<<<<<<< HEAD
-  include Votable
-=======
-  attr_writer :review_year, :review_month, :review_day
->>>>>>> d731d5b... Make changes requested in pr
 
   def submitted?
     submission_date.present?
@@ -115,34 +110,9 @@ class Idea < ApplicationRecord
     lead
   ]
 
-  def review_year
-    review_date&.strftime('%Y')
-  end
-
-  def review_month
-    review_date&.strftime('%m')
-  end
-
-  def review_day
-    review_date&.strftime('%d')
-  end
-
   private
 
   def send_assigned_user_email
     IdeaMailer.assigned_idea_email_template(assigned_user, self).deliver_now if saved_change_to_assigned_user_id?
-  end
-
-  def update_review_date
-    if !@review_year.blank? || !@review_month.blank? || !@review_day.blank?
-      begin
-        date_str = "#{@review_year}-#{@review_month}-#{@review_day}"
-        self.review_date = Date.parse(date_str)
-      rescue ArgumentError
-        errors.add(:review_date, 'must be a valid date')
-      end
-    else
-      self.review_date = nil
-    end
   end
 end

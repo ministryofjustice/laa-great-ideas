@@ -46,7 +46,7 @@
     <% if current_user.admin? %>
       <div class="govuk-form-group">
         <%= form.label :assigned_user_id, class: "govuk-label" %>
-        <%= form.collection_select(:assigned_user_id, User.all.where(:admin => true), :id, :email, {include_blank: 'Please select' }, { class: "govuk-select" }) %>
+        <%= form.collection_select(:assigned_user_id, User.all.where(admin: true), :id, :email, {include_blank: 'Please select' }, { class: "govuk-select" }) %>
       </div>
       <div class="govuk-form-group">
           <%= form.label :review_date, class: "govuk-label" %>
