@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 class Idea < ApplicationRecord
-  include ReviewDate, Votable
+  include ReviewDate
+  include Votable
   belongs_to :user
   belongs_to :assigned_user, class_name: 'User', optional: true
   has_many :comments, dependent: :destroy
@@ -116,3 +118,4 @@ class Idea < ApplicationRecord
     IdeaMailer.assigned_idea_email_template(assigned_user, self).deliver_now if saved_change_to_assigned_user_id?
   end
 end
+# rubocop:enable Metrics/ClassLength
