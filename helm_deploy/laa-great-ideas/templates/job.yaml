@@ -1,0 +1,57 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migrate
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  activeDeadlineSeconds: 60
+  template:
+    name: db-migrate
+    spec: 
+      restartPolicy: Never
+      containers:
+      - name: db-migrate
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command:
+          - bundle
+          - exec
+          - rails
+          - db:migrate
+        env:
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: laa-great-ideas-rds-instance-output
+                key: database_username
+
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: laa-great-ideas-rds-instance-output
+                key: database_password
+
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: laa-great-ideas-rds-instance-output
+                key: rds_instance_address
+          
+          - name: DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: laa-great-ideas-rds-instance-output
+                key: database_name
+          
+          - name: SECRET_KEY_BASE
+            valueFrom: 
+              secretKeyRef:
+                name: {{ include "laa-great-ideas.fullname" . }}
+                key: secret_key_base
+          
+          - name: APP_HOST
+            value: {{ index .Values.ingress.hosts 0 }}
+
+          - name: RAILS_ENV
+            value: {{ .Values.rails.rails_env }}
