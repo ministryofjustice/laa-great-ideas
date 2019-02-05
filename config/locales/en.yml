@@ -1,109 +1,67 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  # Benefits
-  better_decision_making:             'Better Decision Making'
-  improved_reputation:                'Improved Repuation'
-  reduced_risk:                       'Reduced Risk'
-  time_saved:                         'Time Saved'
-  cost:                               'Cost'
-  improved_service:                   'Improved Service'
-  staff_engagement_and_moral:         'Staff Engagement and Moral'
-
-  # IT Systems
-  it_systems:                         'IT Systems'
-  cclf:                               'CCLF'
-  ccms:                               'CCMS'
-  ccr:                                'CCR'
-  cis:                                'CIS'
-  cwa:                                'CWA'
-  eforms:                             'eForms'
-  laa_online_portal:                  'LAA Online Portal'
-  maat:                               'MAAT'
-  maat_libra:                         'MAAT Libra'
-  management_information:             'MAnagement Information (MI)'
-  obiee:                              'OBIEE'
-  pims:                               'PIMS'
-  tv:                                 'TV'
-
-  # Involvement
-  i_want_to_be_informed:              'I want to be informed'
-  i_want_to_be_involved:              'I want to be involved'
-  i_want_to_lead_on_this:             'I want to lead on this'
-  no_involvement:                     'No involvement'
-
-  # Business area
-  exceptional_and_complex_cases:      'Exceptional and Complex Cases' 
-  crime:                              'Crime'
-  civil:                              'Civil'
-  central_commissioning:              'Central Commissioning'
-  delivery_cm_other:                  'Delivery / CM Other' 
-  public_defender_service:            'Public Defender Service'
-  service_development:                'Service Development'
-  contract_management:                'Contract Management'
-  cla:                                'CLA' 
-  digital:                            'Digital'
-  assurance:                          'Assurance'
-  finance:                            'Finance'
-  planning_and_performance:           'Planning and Performance' 
-  ceo_office:                         'CEO Office' 
-  communications:                     'Communications'
-  operational_change_and_improvement: 'Operational Change and Improvement' 
-  engagement_and_inclusion:           'Engagement and Inclusion' 
-  corporate_centre_correspondence:    'Corporate Centre Correspondence'
-  central_legal:                      'Central Legal'
-
-  # area_of_interest
-  equality_and_diversity:             'Equality and Diversity'
-  it_development:                     'IT Development'
-  learning_and_development:           'Learning and Development'
-  my_business_area:                   'My Business Area'
-  my_office:                          'My Office'
-  other_business_area:                'Other Business Area'
-  staff_engagement:                   'Staff Engagement'
-
-  # Statuses
-  draft:                              'Draft'
-  awaiting_approval:                  'Awaiting Approval' 
-  approved:                           'Approved'
-  investigation:                      'Investigation'
-  implementing:                       'Implementing' 
-  interim_benefits:                   'Interim Benefits' 
-  benefits_realised:                  'Benefits Realised' 
-  not_proceeding:                     'Not Proceeding'
-
   activerecord:
     attributes:
       idea:
-        area_of_interest:             'Area of Interest'
-        business_area:                'Business Area'
-        it_system:                    'IT System'
+        area_of_interest: Area of Interest
+        business_area: Business Area
+        it_system: IT System
+  approved: Approved
+  assurance: Assurance
+  awaiting_approval: Awaiting Approval
+  benefits_realised: Benefits Realised
+  better_decision_making: Better Decision Making
+  cclf: CCLF
+  ccms: CCMS
+  ccr: CCR
+  central_commissioning: Central Commissioning
+  central_legal: Central Legal
+  ceo_office: CEO Office
+  cis: CIS
+  civil: Civil
+  cla: CLA
+  communications: Communications
+  contract_management: Contract Management
+  corporate_centre_correspondence: Corporate Centre Correspondence
+  cost: Cost
+  crime: Crime
+  cwa: CWA
+  delivery_cm_other: Delivery / CM Other
+  digital: Digital
+  draft: Draft
+  eforms: eForms
+  engagement_and_inclusion: Engagement and Inclusion
+  equality_and_diversity: Equality and Diversity
+  exceptional_and_complex_cases: Exceptional and Complex Cases
+  finance: Finance
+  i_want_to_be_informed: I want to be informed
+  i_want_to_be_involved: I want to be involved
+  i_want_to_lead_on_this: I want to lead on this
+  implementing: Implementing
+  improved_reputation: Improved Repuation
+  improved_service: Improved Service
+  interim_benefits: Interim Benefits
+  investigation: Investigation
+  it_development: IT Development
+  it_systems: IT Systems
+  laa_online_portal: LAA Online Portal
+  learning_and_development: Learning and Development
+  maat: MAAT
+  maat_libra: MAAT Libra
+  management_information: MAnagement Information (MI)
+  my_business_area: My Business Area
+  my_office: My Office
+  no_involvement: No involvement
+  not_proceeding: Not Proceeding
+  obiee: OBIEE
+  operational_change_and_improvement: Operational Change and Improvement
+  other_business_area: Other Business Area
+  pims: PIMS
+  planning_and_performance: Planning and Performance
+  public_defender_service: Public Defender Service
+  reduced_risk: Reduced Risk
+  service_development: Service Development
+  staff_engagement: Staff Engagement
+  staff_engagement_and_moral: Staff Engagement and Moral
+  time_saved: Time Saved
+  tv: TV
