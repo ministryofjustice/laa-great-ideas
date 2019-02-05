@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
   # GET /comments
   def index
-    @comments = Comment.where('idea_id = ?', params[:idea_id])
+    @comments = Comment.includes(:user).where('idea_id = ?', params[:idea_id])
   end
 
   def show; end
@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    @comment = Comment.includes(:user).find(params[:id])
   end
 
   def set_idea

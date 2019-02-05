@@ -3,20 +3,20 @@
 require 'rails_helper'
 
 RSpec.describe 'Comments', type: :request do
-  let(:default_user) { build :user }
-  let(:admin_user) { build :admin }
+  let(:default_user) { create :user }
+  let(:admin_user) { create :admin }
   let(:idea) { create :idea }
   let(:approved_idea) { create :approved_idea }
   let(:not_proceeding_idea) { create :idea, status: Idea.statuses[:not_proceeding] }
-  let(:comment) { create :comment }
+  let(:comment) { create :comment, user: default_user }
 
   context 'As a logged in user' do
     before { sign_in default_user }
 
     describe 'GET /comments' do
       it 'returns a list of comments' do
-        create :comment, idea_id: idea.id
-        create :comment, body: 'Comment 2', idea_id: idea.id
+        create :comment, idea_id: idea.id, user: default_user
+        create :comment, body: 'Comment 2', idea_id: idea.id, user: default_user
         get idea_comments_path(idea)
         expect(response.body).to include('Comment 1')
         expect(response.body).to include('Comment 2')
