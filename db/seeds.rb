@@ -18,7 +18,7 @@ User.create!(
 
 10.times do
   User.create!(
-    email: "#{Faker::Name.first_name}@justice.gov.uk",
+    email: "#{Faker::Name.first_name}.#{Faker::Name.unique.last_name}@justice.gov.uk",
     password: 'change_me',
     admin: false,
     confirmed_at: Time.now
