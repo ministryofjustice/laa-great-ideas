@@ -30,4 +30,80 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  # Benefits
+  better_decision_making:             'Better Decision Making'
+  improved_reputation:                'Improved Repuation'
+  reduced_risk:                       'Reduced Risk'
+  time_saved:                         'Time Saved'
+  cost:                               'Cost'
+  improved_service:                   'Improved Service'
+  staff_engagement_and_moral:         'Staff Engagement and Moral'
+
+  # IT Systems
+  it_systems:                         'IT Systems'
+  cclf:                               'CCLF'
+  ccms:                               'CCMS'
+  ccr:                                'CCR'
+  cis:                                'CIS'
+  cwa:                                'CWA'
+  eforms:                             'eForms'
+  laa_online_portal:                  'LAA Online Portal'
+  maat:                               'MAAT'
+  maat_libra:                         'MAAT Libra'
+  management_information:             'MAnagement Information (MI)'
+  obiee:                              'OBIEE'
+  pims:                               'PIMS'
+  tv:                                 'TV'
+
+  # Involvement
+  i_want_to_be_informed:              'I want to be informed'
+  i_want_to_be_involved:              'I want to be involved'
+  i_want_to_lead_on_this:             'I want to lead on this'
+  no_involvement:                     'No involvement'
+
+  # Business area
+  exceptional_and_complex_cases:      'Exceptional and Complex Cases' 
+  crime:                              'Crime'
+  civil:                              'Civil'
+  central_commissioning:              'Central Commissioning'
+  delivery_cm_other:                  'Delivery / CM Other' 
+  public_defender_service:            'Public Defender Service'
+  service_development:                'Service Development'
+  contract_management:                'Contract Management'
+  cla:                                'CLA' 
+  digital:                            'Digital'
+  assurance:                          'Assurance'
+  finance:                            'Finance'
+  planning_and_performance:           'Planning and Performance' 
+  ceo_office:                         'CEO Office' 
+  communications:                     'Communications'
+  operational_change_and_improvement: 'Operational Change and Improvement' 
+  engagement_and_inclusion:           'Engagement and Inclusion' 
+  corporate_centre_correspondence:    'Corporate Centre Correspondence'
+  central_legal:                      'Central Legal'
+
+  # area_of_interest
+  equality_and_diversity:             'Equality and Diversity'
+  it_development:                     'IT Development'
+  learning_and_development:           'Learning and Development'
+  my_business_area:                   'My Business Area'
+  my_office:                          'My Office'
+  other_business_area:                'Other Business Area'
+  staff_engagement:                   'Staff Engagement'
+
+  # Statuses
+  draft:                              'Draft'
+  awaiting_approval:                  'Awaiting Approval' 
+  approved:                           'Approved'
+  investigation:                      'Investigation'
+  implementing:                       'Implementing' 
+  interim_benefits:                   'Interim Benefits' 
+  benefits_realised:                  'Benefits Realised' 
+  not_proceeding:                     'Not Proceeding'
+
+  activerecord:
+    attributes:
+      idea:
+        area_of_interest:             'Area of Interest'
+        business_area:                'Business Area'
+        it_system:                    'IT System'
