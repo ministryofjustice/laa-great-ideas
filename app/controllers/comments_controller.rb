@@ -39,12 +39,19 @@ class CommentsController < ApplicationController
     redirect_to @idea, notice: 'You cannot create a comment on this idea' unless user_can_comment?(@idea, current_user)
     return if performed?
 
-    @comment = @idea.comments.build(comment_params)
-    @comment.user = current_user
-    render :new unless @comment.save
+    create_comment
     return if performed?
 
     redirect_to idea_comment_path(@comment.idea, @comment), notice: 'Comment created'
+  end
+
+  private
+
+  def create_comment
+    @comment = @idea.comments.build(comment_params)
+    @comment.status_at_comment_time = Comment.status_at_comment_times[@idea.status.to_sym]
+    @comment.user = current_user
+    render :new unless @comment.save
   end
 
   def set_comment
