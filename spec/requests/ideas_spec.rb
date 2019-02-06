@@ -136,7 +136,8 @@ RSpec.describe 'Ideas', type: :request do
     describe 'update admin fields' do
       it 'should update existing idea' do
         patch idea_path(idea), params: { idea: { assigned_user_id: admin_user.id, status: 'approved',
-                                                 participation_level: 'assist', review_date: Date.today } }
+                                                 participation_level: 'assist', review_year: Date.today.year,
+                                                 review_month: Date.today.month, review_day: Date.today.day } }
         idea.reload
         expect(idea.assigned_user_id).to eq admin_user.id
         expect(idea.status).to eq 'approved'
@@ -160,6 +161,25 @@ RSpec.describe 'Ideas', type: :request do
         get ideas_path(view: 'submitted')
         expect(response).to have_http_status(200)
         expect(response.body).to include 'New idea1'
+      end
+    end
+
+    describe 'submitting an idea with a past review date' do
+      it 'should not update existing idea' do
+        patch idea_path(idea), params: { idea: { assigned_user_id: admin_user.id, status: 'approved',
+                                                 participation_level: 'assist', review_year: Date.yesterday.year,
+                                                 review_month: Date.yesterday.month, review_day: Date.yesterday.day } }
+        expect(idea.review_date).to be_nil
+        expect(response.body).to include('Review date cannot be in the past')
+      end
+    end
+
+    describe 'submitting an idea with an invalid date' do
+      it 'should not update existing idea' do
+        patch idea_path(idea), params: { idea: { assigned_user_id: admin_user.id, status: 'approved',
+                                                 participation_level: 'assist', review_year: Date.today.year,
+                                                 reciew_month: '13', review_day: Date.today.day } }
+        expect(idea.review_date).to be_nil
       end
     end
   end

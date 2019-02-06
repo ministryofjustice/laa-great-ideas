@@ -93,7 +93,8 @@ class IdeasController < ApplicationController
         :assigned_user_id,
         :participation_level,
         :status,
-        :review_date
+        :review_date,
+        :review_year, :review_month, :review_day
       )
     else
       params.require(:idea).permit(
