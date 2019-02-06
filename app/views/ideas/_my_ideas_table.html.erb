@@ -12,7 +12,7 @@
       <tr>
         <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
         <td class="govuk-table__cell"><%= idea.title %></td>
-        <td class="govuk-table__cell"><%= idea.status %></td>
+        <td class="govuk-table__cell"><%= t(idea.status) %></td>
         <td class="govuk-table__cell"><%= idea.updated_at.strftime("%e %B %Y") %></td>
       </tr>
     <% end %>
