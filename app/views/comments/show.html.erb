@@ -11,7 +11,7 @@
   </tr>
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Status at comment time:</th>
-    <td class="govuk-table__cell"><%= @comment.status_at_comment_time %></td>
+    <td class="govuk-table__cell"><%= t(@comment.status_at_comment_time) %></td>
   </tr>
 </table>
 <%= link_to 'Edit', edit_idea_comment_path(@comment.idea, @comment) %> |

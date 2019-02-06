@@ -9,7 +9,7 @@ RSpec.describe 'Ideas helper' do
       enum = double('enum', keys: %w[exceptional_and_complex_cases crime])
       expect(enum_to_select(enum)).to eq(
         [
-          ['Exceptional and complex cases', 'exceptional_and_complex_cases'],
+          ['Exceptional and Complex Cases', 'exceptional_and_complex_cases'],
           %w[Crime crime]
         ]
       )

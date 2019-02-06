@@ -1,16 +1,16 @@
 <% title "Idea" %>
 <table class="govuk-table">
   <tr class="govuk-table__row">
-    <th class="govuk-table__header" scope="row">Area of Intrest:</th>
-    <td class="govuk-table__cell"><%= @idea.area_of_interest%></td>
+    <th class="govuk-table__header" scope="row">Area of Interest:</th>
+    <td class="govuk-table__cell"><%= t(@idea.area_of_interest) %></td>
   </tr>
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Business Area:</th>
-    <td class="govuk-table__cell"><%= @idea.business_area %></td>
+    <td class="govuk-table__cell"><%= t(@idea.business_area) %></td>
   </tr>
   <tr class="govuk-table__row">
-    <th class="govuk-table__header" scope="row">It System:</th>
-    <td class="govuk-table__cell"><%= @idea.it_system %></td>
+    <th class="govuk-table__header" scope="row">IT System:</th>
+    <td class="govuk-table__cell"><%= t(@idea.it_system) %></td>
   </tr>
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Title:</th>
@@ -22,7 +22,7 @@
   </tr>
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Benefits:</th>
-    <td class="govuk-table__cell"><%= @idea.benefits %></td>
+    <td class="govuk-table__cell"><%= t(@idea.benefits) %></td>
   </tr>
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Impact:</th>
@@ -30,7 +30,7 @@
   </tr>
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Involvement: </th>
-    <td class="govuk-table__cell"><%= @idea.involvement %></td>
+    <td class="govuk-table__cell"><%= t(@idea.involvement) %></td>
   </tr>
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Submission Date:</th>
@@ -46,7 +46,7 @@
   </tr>
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Status:</th>
-    <td class="govuk-table__cell"><%= @idea.status%></td>
+    <td class="govuk-table__cell"><%= t(@idea.status)%></td>
   </tr>
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Review Date:</th>
