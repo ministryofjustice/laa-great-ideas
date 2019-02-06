@@ -1,3 +1,19 @@
 .govuk-label {
   font-weight: bold;
 }
+div#votes p  {
+  display: inline-block;
+  text-align: right;
+  padding-right: 10px;
+  vertical-align: text-top;
+}
+div#votebutton .govuk-button {
+  margin-top: -7px;
+}
+div#votes div {
+  display: inline-block;
+  text-align: right;
+}
+div#votes{
+  text-align: right;
+}

@@ -54,30 +54,30 @@
   </tr>
 </table>
 <%= link_to 'Edit', edit_idea_path(@idea), class: "govuk-button" %>
-  <p class="govuk-body"></p>
-<%= link_to 'Back', ideas_path %>
+  <div class="govuk-!-padding-bottom-5"></div>
 <% if @idea.draft? %>
   <%= button_to 'Submit idea', idea_submit_path(@idea), class: "govuk-button" %>
 <% end %>
-  <p class="govuk-body"></p>
-
-<% if @idea.approved_by_admin? %>
-  <p>
-    <strong>Votes</strong>
-    <%= @idea.votes.count %>
-  </p>
-  <% if @idea.user_voted?(current_user) %>
-    <%= button_to 'Remove Vote', idea_vote_path(@idea, @vote.id), method: :delete %>
-  <% else %>
-    <%= button_to 'Vote', idea_votes_path(@idea) %>
+<div id="votes" class="column-one-third">
+  <% if @idea.approved_by_admin? %>
+    <p class="govuk-body-l">Votes</p>
+    <p class="govuk-body-l"><%= @idea.votes.count %></p>
+    <div id="votebutton">
+      <% if @idea.user_voted?(current_user) %>
+        <%= button_to 'Remove Vote', idea_vote_path(@idea, @vote.id), method: :delete, class: "govuk-button" %>
+      <% else %>
+        <%= button_to 'Vote', idea_votes_path(@idea), class: "govuk-button" %>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
-
+</div>
+<div class="govuk-!-padding-bottom-5"></div>
 <% if user_can_comment?(@idea, current_user) %>
-  <%= link_to 'Add Comment', new_idea_comment_path(@idea), class: "govuk-button" %>
-  <h3 class="govuk-heading-m">Comments</h3>
-  <p class="govuk-body"></p>
+  <div class="govuk-!-padding-bottom-5"></div>
   <table class="govuk-table">
     <%= render 'comments/comment_list', comments: @idea.comments %>
   </table>
+  <%= link_to 'Add Comment', new_idea_comment_path(@idea), class: "govuk-button" %>
 <% end %>
+<div class="govuk-!-padding-bottom-5"></div>
+<%= link_to 'Back', ideas_path %>
