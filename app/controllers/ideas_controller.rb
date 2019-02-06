@@ -21,7 +21,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    @idea = Idea.includes(:comments).find(params[:id])
+    @idea = Idea.includes(:comments).includes(:user).find(params[:id])
   end
 
   # GET /ideas/new
