@@ -26,4 +26,29 @@ RSpec.describe IdeaMailer, type: :mailer do
       expect(mail.govuk_notify_template).to eq(template)
     end
   end
+
+  describe 'Status Update Email' do
+    let(:user) { build :user }
+    let(:idea) { build :idea, title: 'New idea', user_id: user.id }
+    let(:template) { 'd816f609-bc00-4f79-961c-da93ffdb8471' }
+    let(:mail) { described_class.status_change_email_template(user, idea) }
+
+    it 'is a govuk_notify delivery' do
+      expect(mail.delivery_method).to be_a(GovukNotifyRails::Delivery)
+    end
+
+    it 'sets the recipient' do
+      expect(mail.to).to eq([user.email])
+    end
+
+    it 'sets the body' do
+      expect(mail.body).to match("This is a GOV.UK Notify email with template #{template}")
+      expect(mail.body).to have_text(idea.title)
+      expect(mail.body).to have_text(idea.status)
+    end
+
+    it 'sets the template' do
+      expect(mail.govuk_notify_template).to eq(template)
+    end
+  end
 end
