@@ -30,6 +30,11 @@ RSpec.describe 'Comments', type: :request do
             post idea_comments_path(approved_idea), params: { comment: { body: 'Test comment' } }
           end.to change(Comment, :count).by(1)
         end
+
+        it 'has a status matching the idea status' do
+          post idea_comments_path(approved_idea), params: { comment: { body: 'Test comment' } }
+          expect(Comment.last.status_at_comment_time).to eq('approved')
+        end
       end
 
       describe 'GET /comments/new' do
