@@ -61,12 +61,12 @@
 <div id="votes" class="column-one-third">
   <% if @idea.approved_by_admin? %>
     <p class="govuk-body-l">Votes</p>
-    <p id="vcount" class="govuk-body-l"><%= @idea.votes.count %></p>
-    <div id="votebutton">
+    <p id="v-count" class="govuk-body-l"><%= @idea.votes.count %></p>
+    <div id="vote-button">
       <% if @idea.user_voted?(current_user) %>
-        <%= button_to 'Remove Vote', idea_vote_path(@idea, @vote.id), method: :delete, class: "govuk-button", id: "removevote" %>
+        <%= button_to 'Remove Vote', idea_vote_path(@idea, @vote.id), method: :delete, class: "govuk-button", id: "remove-vote" %>
       <% else %>
-        <%= button_to 'Vote', idea_votes_path(@idea), class: "govuk-button", id: "addvote", data: { disable_with: "Voted" } %>
+        <%= button_to 'Vote', idea_votes_path(@idea), class: "govuk-button", id: "add-vote" %>
       <% end %>
     </div>
   <% end %>
@@ -83,30 +83,53 @@
 <%= link_to 'Back', ideas_path %>
 
 <script>
-  function vote(event) {
-    event.preventDefault();
-
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == XMLHttpRequest.DONE && this.status == 204) {
-        // Change vote button text
-        // Increment vote count
-       var vcount = document.getElementById("vcount")
+  function addVote(){
+    if (this.readyState == XMLHttpRequest.DONE) {
+      if(this.status == 204){
+        var vcount = document.getElementById("v-count")
         var votecount = vcount.innerHTML;
         votecount = parseInt(votecount);
         votecount++;
         vcount.innerHTML = votecount;
-        document.getElementById("addvote").disabled = true;
-        document.getElementById("addvote").value = "Voted";
+        document.getElementById("add-vote").disabled = true;
+        document.getElementById("add-vote").value = "Voted";
+
+      } else {
+        var error = document.getElementById('vote-error');
+
+        if (error === null){
+          var para = document.createElement("p");
+          para.setAttribute("id", "vote-error");
+          var node = document.createTextNode("Vote not counted");
+          para.appendChild(node);
+          var element = document.getElementById("votes");
+          element.appendChild(para);
         }
-      else {
-        // Display some error message
-        // Enable button again
       }
-    };
+    }
+  }
+
+
+  function vote(event) {
+    event.preventDefault();
+
+    var token = document.querySelector('meta[name="csrf-token"]').content
+
+    let xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = addVote.bind(xhttp);
     xhttp.open("POST", "<%= idea_votes_path(@idea) %>", true);
+    xhttp.setRequestHeader('X-CSRF-Token', token)
     xhttp.send();
   }
-  document.getElementById("addvote").addEventListener("click", vote)
+
+  var votebutton =  document.getElementById('add-vote');
+    if (typeof(votebutton) != 'undefined' && votebutton != null)
+    {
+      votebutton.addEventListener("click", vote)
+    }
+
 
 </script>
+
+

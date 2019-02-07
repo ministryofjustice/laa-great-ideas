@@ -6,9 +6,12 @@ div#votes p  {
   text-align: right;
   padding-right: 10px;
   vertical-align: text-top;
+  margin-bottom: 5px;
 }
-div#votebutton .govuk-button {
+div#vote-button .govuk-button {
   margin-top: -7px;
+  margin-bottom: 5px;
+
 }
 div#votes div {
   display: inline-block;
@@ -17,3 +20,10 @@ div#votes div {
 div#votes{
   text-align: right;
 }
+div#votes p#vote-error {
+  display: block;
+
+  color: #B10E1E;
+
+}
+
