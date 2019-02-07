@@ -4,6 +4,7 @@ class VotesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_vote, only: %i[destroy]
   before_action :set_idea, only: %i[create destroy]
+  skip_before_action :verify_authenticity_token
 
   def create
     redirect_to @idea, notice: 'You can only vote on approved ideas.' unless @idea.approved_by_admin?
@@ -12,7 +13,8 @@ class VotesController < ApplicationController
     @vote = @idea.votes.build
     @vote.user = current_user
     @vote.save
-    redirect_to @idea, notice: 'Your vote has been added'
+    # redirect_to @idea, notice: 'Your vote has been added'
+    head :no_content
   end
 
   def destroy

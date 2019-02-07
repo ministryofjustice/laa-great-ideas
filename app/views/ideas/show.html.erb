@@ -61,12 +61,12 @@
 <div id="votes" class="column-one-third">
   <% if @idea.approved_by_admin? %>
     <p class="govuk-body-l">Votes</p>
-    <p class="govuk-body-l"><%= @idea.votes.count %></p>
+    <p id="vcount" class="govuk-body-l"><%= @idea.votes.count %></p>
     <div id="votebutton">
       <% if @idea.user_voted?(current_user) %>
-        <%= button_to 'Remove Vote', idea_vote_path(@idea, @vote.id), method: :delete, class: "govuk-button" %>
+        <%= button_to 'Remove Vote', idea_vote_path(@idea, @vote.id), method: :delete, class: "govuk-button", id: "removevote" %>
       <% else %>
-        <%= button_to 'Vote', idea_votes_path(@idea), class: "govuk-button" %>
+        <%= button_to 'Vote', idea_votes_path(@idea), class: "govuk-button", id: "addvote", data: { disable_with: "Voted" } %>
       <% end %>
     </div>
   <% end %>
@@ -81,3 +81,32 @@
 <% end %>
 <div class="govuk-!-padding-bottom-5"></div>
 <%= link_to 'Back', ideas_path %>
+
+<script>
+  function vote(event) {
+    event.preventDefault();
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == XMLHttpRequest.DONE && this.status == 204) {
+        // Change vote button text
+        // Increment vote count
+       var vcount = document.getElementById("vcount")
+        var votecount = vcount.innerHTML;
+        votecount = parseInt(votecount);
+        votecount++;
+        vcount.innerHTML = votecount;
+        document.getElementById("addvote").disabled = true;
+        document.getElementById("addvote").value = "Voted";
+        }
+      else {
+        // Display some error message
+        // Enable button again
+      }
+    };
+    xhttp.open("POST", "<%= idea_votes_path(@idea) %>", true);
+    xhttp.send();
+  }
+  document.getElementById("addvote").addEventListener("click", vote)
+
+</script>
