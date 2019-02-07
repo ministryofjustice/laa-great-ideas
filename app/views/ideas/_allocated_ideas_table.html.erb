@@ -4,7 +4,7 @@
         <tr class="govuk-table__row">
             <th class="govuk-table__header" scope="col">Idea ID</th>
             <th class="govuk-table__header" scope="col">Title</th>
-            <th class="govuk-table__header" scope="col">Area of Intrest</th>
+            <th class="govuk-table__header" scope="col">Area of Interest</th>
             <th class="govuk-table__header" scope="col">Status</th>
             <th class="govuk-table__header" scope="col">Submitted Date</th>
             <th class="govuk-table__header" scope="col">Review Date</th>
@@ -16,8 +16,8 @@
             <tr>
             <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
             <td class="govuk-table__cell"><%= idea.title %></td>
-            <td class="govuk-table__cell"><%= idea.area_of_interest %></td>
-            <td class="govuk-table__cell"><%= idea.status %></td>
+            <td class="govuk-table__cell"><%= t(idea.area_of_interest) %></td>
+            <td class="govuk-table__cell"><%= t(idea.status) %></td>
             <td class="govuk-table__cell"><%= idea.submission_date&.strftime("%e %B %Y") %></td>
             <td class="govuk-table__cell"><%= idea.review_date&.strftime("%e %B %Y") %></td>
             <td class="govuk-table__cell"><%= idea.votes.count %></td>
