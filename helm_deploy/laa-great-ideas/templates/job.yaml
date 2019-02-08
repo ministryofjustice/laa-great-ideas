@@ -6,7 +6,8 @@ metadata:
     "helm.sh/hook": pre-install,pre-upgrade
     "helm.sh/hook-delete-policy": hook-succeeded
 spec:
-  activeDeadlineSeconds: 60
+  activeDeadlineSeconds: 160
+  ttlSecondsAfterFinished: 100
   template:
     name: db-migrate
     spec: 
@@ -17,8 +18,14 @@ spec:
         command:
           - bundle
           - exec
-          - rails
+          - rake
+          - db:exists
+          - '&&'
+          - rake
           - db:migrate
+          - '||'
+          - rake
+          - db:setup
         env:
           - name: DB_USER
             valueFrom:
