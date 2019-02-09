@@ -15,17 +15,8 @@ spec:
       containers:
       - name: db-migrate
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        command:
-          - bundle
-          - exec
-          - rake
-          - db:exists
-          - '&&'
-          - rake
-          - db:migrate
-          - '||'
-          - rake
-          - db:setup
+        command: ["/bin/sh","-c"]
+        args: ["bundle exec rake db:exists && rake db:migrate || rake db:setup"]
         env:
           - name: DB_USER
             valueFrom:
