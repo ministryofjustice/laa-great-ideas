@@ -130,7 +130,7 @@ jobs:
                         --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
                         --values ./helm_deploy/laa-great-ideas/values-staging.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}" \
-                        --set image.tag="latest" \
+                        --set image.tag="${CIRCLE_SHA1}" \
                         --set replicaCount="1"
 
 workflows:
