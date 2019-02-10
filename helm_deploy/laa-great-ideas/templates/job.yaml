@@ -43,10 +43,7 @@ spec:
                 key: database_name
           
           - name: SECRET_KEY_BASE
-            valueFrom: 
-              secretKeyRef:
-                name: {{ include "laa-great-ideas.fullname" . }}
-                key: secret_key_base
+            value: doesnotmatterforthisjob
           
           - name: APP_HOST
             value: {{ index .Values.ingress.hosts 0 }}
