@@ -152,6 +152,8 @@ workflows:
           branches:
             ignore: master
     - deploy_staging:
+        requires:
+        - build_and_test
         filters:
           branches:
             only: master
