@@ -6,7 +6,8 @@ metadata:
     "helm.sh/hook": pre-install,pre-upgrade
     "helm.sh/hook-delete-policy": hook-succeeded
 spec:
-  activeDeadlineSeconds: 60
+  activeDeadlineSeconds: 160
+  ttlSecondsAfterFinished: 100
   template:
     name: db-migrate
     spec: 
@@ -14,11 +15,8 @@ spec:
       containers:
       - name: db-migrate
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        command:
-          - bundle
-          - exec
-          - rails
-          - db:migrate
+        command: ["/bin/sh","-c"]
+        args: ["bundle exec rake db:exists && rake db:migrate || rake db:setup"]
         env:
           - name: DB_USER
             valueFrom:
@@ -45,10 +43,7 @@ spec:
                 key: database_name
           
           - name: SECRET_KEY_BASE
-            valueFrom: 
-              secretKeyRef:
-                name: {{ include "laa-great-ideas.fullname" . }}
-                key: secret_key_base
+            value: doesnotmatterforthisjob
           
           - name: APP_HOST
             value: {{ index .Values.ingress.hosts 0 }}

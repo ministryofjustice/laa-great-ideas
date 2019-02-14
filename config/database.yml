@@ -21,6 +21,10 @@ uat:
   <<: *default
   database: <%= ENV.fetch("DB_NAME", "laa-great-ideas_uat") %>
 
+staging:
+  <<: *default
+  database: <%= ENV.fetch("DB_NAME", "laa-great-ideas_staging") %>
+
 production:
   <<: *default
   database: <%= ENV.fetch("DB_NAME", "laa-great-ideas_production") %>
