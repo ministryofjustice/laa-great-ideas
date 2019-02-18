@@ -5,8 +5,9 @@ require 'rails_helper'
 RSpec.describe 'Ideas', type: :request do
   let(:default_user) { build :user }
   let(:admin_user) { build :admin }
-  let(:idea) { create :idea }
-  let(:idea2) { create :idea, title: 'New idea2' }
+  let(:idea) { create :idea, user: default_user }
+  let(:idea_by_admin) { create :idea, user: admin_user }
+  let(:idea2) { create :idea, title: 'New idea2', user: default_user }
   let(:complete_idea) { create :complete_idea }
   let(:submitted_idea) { create :submitted_idea }
 
@@ -57,6 +58,18 @@ RSpec.describe 'Ideas', type: :request do
         patch idea_path(idea), params: { idea: { title: 'New Test title' } }
         idea.reload
         expect(idea.title).to eq 'New Test title'
+      end
+
+      it 'should not be able to update another users idea' do
+        patch idea_path(idea_by_admin), params: { idea: { title: 'New Test title' } }
+        idea_by_admin.reload
+        expect(idea.title).to eq 'New idea1'
+      end
+
+      it 'should not be able to update an idea once submitted' do
+        patch idea_path(submitted_idea), params: { idea: { title: 'New Test title' } }
+        submitted_idea.reload
+        expect(idea.title).to eq 'New idea1'
       end
     end
 
@@ -143,6 +156,20 @@ RSpec.describe 'Ideas', type: :request do
         expect(idea.status).to eq 'approved'
         expect(idea.participation_level).to eq 'assist'
         expect(idea.review_date).to eq Date.today
+      end
+    end
+
+    describe 'update an idea' do
+      it 'should change another users idea' do
+        patch idea_path(idea), params: { idea: { title: 'New Test title' } }
+        idea.reload
+        expect(idea.title).to eq 'New Test title'
+      end
+
+      it 'edit a submitted idea' do
+        patch idea_path(submitted_idea), params: { idea: { title: 'New Test title' } }
+        submitted_idea.reload
+        expect(submitted_idea.title).to eq 'New Test title'
       end
     end
 

@@ -44,6 +44,7 @@ class IdeasController < ApplicationController
 
   # PATCH/PUT /ideas/1
   def update
+    authorize @idea
     if @idea.update(idea_params)
       redirect_to @idea, notice: 'Idea was successfully updated.'
     else
@@ -109,5 +110,10 @@ class IdeasController < ApplicationController
         :status
       )
     end
+  end
+
+  def user_not_authorized
+    flash[:alert] = 'You are not authorised to amend this idea'
+    redirect_to(idea_path(@idea) || root_path)
   end
 end
