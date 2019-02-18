@@ -9,6 +9,7 @@ RSpec.describe 'Comments', type: :request do
   let(:approved_idea) { create :approved_idea }
   let(:not_proceeding_idea) { create :idea, status: Idea.statuses[:not_proceeding] }
   let(:comment) { create :comment, user: default_user }
+  let(:admin_comment) { create :comment, user: admin_user }
 
   context 'As a logged in user' do
     before { sign_in default_user }
@@ -63,6 +64,12 @@ RSpec.describe 'Comments', type: :request do
           patch idea_comment_path(comment.idea, comment), params: { comment: { body: 'Changed comment' } }
           comment.reload
           expect(comment.body).to eq('Changed comment')
+        end
+
+        it 'does not update another users comment' do
+          patch idea_comment_path(admin_comment.idea, admin_comment), params: { comment: { body: 'Changed comment' } }
+          admin_comment.reload
+          expect(admin_comment.body).to_not eq('Changed comment')
         end
 
         it 'fails to updates a comment if parameters missing' do
@@ -122,6 +129,16 @@ RSpec.describe 'Comments', type: :request do
         it 'returns the new comment page' do
           get new_idea_comment_path(not_proceeding_idea)
           expect(response.body).to include('New Comment')
+        end
+      end
+    end
+
+    context 'with another users idea' do
+      describe 'PATCH /comment' do
+        it 'updates a comment' do
+          patch idea_comment_path(comment.idea, comment), params: { comment: { body: 'Changed comment' } }
+          comment.reload
+          expect(comment.body).to eq('Changed comment')
         end
       end
     end

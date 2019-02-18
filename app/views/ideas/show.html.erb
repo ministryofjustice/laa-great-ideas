@@ -72,7 +72,7 @@
   <% end %>
 </div>
 <div class="govuk-!-padding-bottom-5"></div>
-<% if CommentPolicy.new(current_user, @idea).update? %>
+<% if CommentPolicy.new(current_user, @idea).new? %>
   <div class="govuk-!-padding-bottom-5"></div>
   <table class="govuk-table">
     <%= render 'comments/comment_list', comments: @idea.comments %>

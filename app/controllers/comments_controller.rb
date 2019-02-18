@@ -20,6 +20,8 @@ class CommentsController < ApplicationController
   def edit; end
 
   def update
+    authorize @comment
+
     if @comment.update(comment_params)
       redirect_to idea_comment_path(@comment.idea, @comment), notice: 'Comment was successfully updated.'
     else

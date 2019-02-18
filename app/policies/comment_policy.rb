@@ -1,12 +1,31 @@
 # frozen_string_literal: true
 
 class CommentPolicy < ApplicationPolicy
+  def new?
+    create?
+  end
+
   def update?
-    return record.approved_by_admin? if user.admin
-    return record.approved_by_admin? && !record.not_proceeding? unless user.admin
+    return true if user.admin
+
+    record.user == user
   end
 
   def create?
-    update?
+    if user.admin
+      admin_commentable_record?
+    else
+      user_commentable_record?
+    end
+  end
+
+  private
+
+  def user_commentable_record?
+    record.approved_by_admin? && record.proceeding?
+  end
+
+  def admin_commentable_record?
+    record.approved_by_admin?
   end
 end
