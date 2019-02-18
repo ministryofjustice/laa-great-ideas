@@ -6,7 +6,7 @@ RSpec.describe 'Add a comment', type: :system do
   let(:default_user) { create :user }
   let(:idea) { create :idea }
   let(:approved_idea) { create :approved_idea }
-  let(:comment) { create :comment }
+  let(:comment) { create :comment, user: default_user }
 
   context 'a logged in user' do
     before do

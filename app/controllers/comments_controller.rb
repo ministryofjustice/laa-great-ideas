@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  include CommentsHelper
   before_action :authenticate_user!
   before_action :set_comment, only: %i[show edit update destroy]
   before_action :set_idea, only: %i[new create show edit update destroy]
@@ -14,15 +13,15 @@ class CommentsController < ApplicationController
   def show; end
 
   def new
-    redirect_to @idea, notice: 'You cannot create a comment on this idea' unless user_can_comment?(@idea, current_user)
-    return if performed?
-
+    authorize @idea, policy_class: CommentPolicy
     @comment = @idea.comments.build
   end
 
   def edit; end
 
   def update
+    authorize @comment
+
     if @comment.update(comment_params)
       redirect_to idea_comment_path(@comment.idea, @comment), notice: 'Comment was successfully updated.'
     else
@@ -36,8 +35,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    redirect_to @idea, notice: 'You cannot create a comment on this idea' unless user_can_comment?(@idea, current_user)
-    return if performed?
+    authorize @idea, policy_class: CommentPolicy
 
     create_comment
     return if performed?
@@ -66,5 +64,10 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(
       :body
     )
+  end
+
+  def user_not_authorized
+    flash[:alert] = 'You cannot create a comment on this idea'
+    redirect_to(idea_path(@idea) || root_path)
   end
 end

@@ -31,6 +31,12 @@ class Idea < ApplicationRecord
     true
   end
 
+  def proceeding?
+    return false if not_proceeding? || draft?
+
+    true
+  end
+
   enum benefits: %i[
     better_decision_making
     improved_reputation
