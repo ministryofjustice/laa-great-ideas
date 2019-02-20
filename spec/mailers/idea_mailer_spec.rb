@@ -44,7 +44,7 @@ RSpec.describe IdeaMailer, type: :mailer do
     it 'sets the body' do
       expect(mail.body).to match("This is a GOV.UK Notify email with template #{template}")
       expect(mail.body).to have_text(idea.title)
-      expect(mail.body).to have_text(idea.status)
+      expect(mail.body).to have_text(t(idea.status))
     end
 
     it 'sets the template' do

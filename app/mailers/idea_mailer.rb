@@ -11,7 +11,7 @@ class IdeaMailer < GovukNotifyRails::Mailer
   def status_change_email_template(user, idea)
     template = 'd816f609-bc00-4f79-961c-da93ffdb8471'
     set_template(template)
-    set_personalisation(title: idea.title, status: idea.status)
+    set_personalisation(title: idea.title, status: t(idea.status))
     mail(to: user.email)
   end
 end
