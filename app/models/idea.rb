@@ -19,7 +19,7 @@ class Idea < ApplicationRecord
   validates :involvement, presence: true, if: :submitted?
   validates :review_date, future: true
   before_validation :update_review_date
-  after_update :send_assigned_user_email
+  after_update :send_update_notifications
 
   def submitted?
     submission_date.present?
@@ -120,8 +120,10 @@ class Idea < ApplicationRecord
 
   private
 
-  def send_assigned_user_email
+  def send_update_notifications
     IdeaMailer.assigned_idea_email_template(assigned_user, self).deliver_now if saved_change_to_assigned_user_id?
+
+    IdeaMailer.status_change_email_template(User.find(user_id), self).deliver_now if saved_change_to_status?
   end
 end
 # rubocop:enable Metrics/ClassLength

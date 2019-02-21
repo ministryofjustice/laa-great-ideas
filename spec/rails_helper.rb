@@ -67,6 +67,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include AbstractController::Translation
 
   config.before(:each, type: :system) do
     driven_by :rack_test

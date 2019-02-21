@@ -21,6 +21,7 @@ RSpec.describe 'Update status', type: :system do
       visit edit_idea_path(idea)
       expect(page).to have_select('idea_status')
       select 'Approved', from: 'idea_status'
+      expect_any_instance_of(IdeaMailer).to receive(:status_change_email_template).and_call_original
       click_button 'Update Idea'
       idea.reload
       expect(idea.status).to eq('approved')
