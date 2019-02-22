@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :comment do
-    association :user, factory: :user, strategy: :build
+  factory :benefit do
     association :idea, factory: :idea, strategy: :build
-    body { 'Comment 1' }
+    benefit { :cost }
   end
 end

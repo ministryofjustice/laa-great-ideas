@@ -32,8 +32,16 @@
       <%= form.text_area :idea, class: "govuk-textarea" %>
     </div>
     <div class="govuk-form-group">
-      <%= form.label :benefits, class: "govuk-label" %>
-      <%= form.select :benefits, enum_to_select(Idea.benefits), { include_blank: 'Please select' }, { class: "govuk-select" } %>
+      <%= form.label :benefits, class: "govuk-label" %> 
+          <span class="govuk-hint">Select all that apply.</span>
+          <div class="govuk-checkboxes">
+            <% Benefit.benefits.keys.each do |benefit| %>
+              <div class="govuk-checkboxes__item">
+                <%= form.check_box :benefit_list, { multiple: true, checked: idea.benefit?(benefit), class: "govuk-checkboxes__input" }, benefit, nil %>
+                <%= form.label t(benefit), class: "govuk-label govuk-checkboxes__label" %>
+              </div>
+            <% end %>
+          </div>
     </div>
     <div class="govuk-form-group">
       <%= form.label :impact, class: "govuk-label" %>

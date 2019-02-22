@@ -41,6 +41,14 @@ RSpec.describe 'Ideas', type: :request do
         expect(response).to have_http_status(302)
         expect(idea.draft?).to be true
       end
+      it 'should create a new idea with benefits' do
+        expect do
+          post ideas_path, params: { idea: { title: 'Test title' }, benefits: %i[cost time_saved] }
+        end.to change(Idea, :count).by(1)
+
+        expect(response).to have_http_status(302)
+        expect(idea.draft?).to be true
+      end
     end
 
     describe 'PATCH /idea' do
@@ -184,7 +192,9 @@ RSpec.describe 'Ideas', type: :request do
 
     describe "GET /ideas(view: 'submitted')" do
       it 'should show a list of submitted ideas' do
-        submitted_idea
+        sub_idea = submitted_idea
+        sub_idea.user = admin_user
+        sub_idea.save
         get ideas_path(view: 'submitted')
         expect(response).to have_http_status(200)
         expect(response.body).to include 'New idea1'
