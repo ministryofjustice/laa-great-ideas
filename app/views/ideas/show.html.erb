@@ -53,7 +53,9 @@
     <td class="govuk-table__cell"><%= @idea.review_date&.strftime("%e %B %Y") %></td>
   </tr>
 </table>
-<%= link_to 'Edit', edit_idea_path(@idea), class: "govuk-button" %>
+<% if policy(@idea).update? %>
+  <%= link_to 'Edit', edit_idea_path(@idea), class: "govuk-button" %>
+<% end %>
   <div class="govuk-!-padding-bottom-5"></div>
 <% if @idea.draft? %>
   <%= button_to 'Submit idea', idea_submit_path(@idea), class: "govuk-button" %>
