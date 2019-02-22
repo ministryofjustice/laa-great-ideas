@@ -4,7 +4,11 @@ class IdeaPolicy < ApplicationPolicy
   def update?
     return true if user.admin
 
-    owner? && !record.submitted?
+    owner? && record.draft?
+  end
+
+  def edit?
+    update?
   end
 
   private

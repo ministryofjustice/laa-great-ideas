@@ -30,7 +30,9 @@ class IdeasController < ApplicationController
   end
 
   # GET /ideas/1/edit
-  def edit; end
+  def edit
+    authorize @idea
+  end
 
   # POST /ideas
   def create
