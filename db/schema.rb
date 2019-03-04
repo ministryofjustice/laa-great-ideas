@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_24_115930) do
+ActiveRecord::Schema.define(version: 2019_02_19_161229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "benefits", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "idea_id"
+    t.integer "benefit"
+    t.index ["idea_id", "benefit"], name: "index_benefits_on_idea_id_and_benefit", unique: true
+    t.index ["idea_id"], name: "index_benefits_on_idea_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string "body", null: false
@@ -32,7 +41,6 @@ ActiveRecord::Schema.define(version: 2019_01_24_115930) do
     t.integer "it_system"
     t.string "title"
     t.text "idea"
-    t.integer "benefits"
     t.text "impact"
     t.integer "involvement"
     t.datetime "created_at", null: false
@@ -74,6 +82,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_115930) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "benefits", "ideas"
   add_foreign_key "comments", "ideas"
   add_foreign_key "comments", "users"
   add_foreign_key "votes", "ideas"

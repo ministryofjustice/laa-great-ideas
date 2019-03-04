@@ -10,13 +10,17 @@ FactoryBot.define do
       business_area { 0 }
       it_system { 0 }
       idea { 'Idea' }
-      benefits { 0 }
       impact { 'Impact' }
       involvement { 0 }
+      after(:create) do |idea|
+        FactoryBot.create_list(:benefit, 1, idea: idea, benefit: :cost)
+      end
 
       factory :submitted_idea do
-        submission_date { Time.now }
-        status { Idea.statuses[:awaiting_approval] }
+        after(:create) do |idea|
+          idea.submission_date = Time.now
+          idea.status = Idea.statuses[:awaiting_approval]
+        end
 
         factory :approved_idea do
           status { Idea.statuses[:approved] }

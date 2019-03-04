@@ -90,7 +90,7 @@ class IdeasController < ApplicationController
         :it_system,
         :title,
         :idea,
-        :benefits,
+        { benefit_list: [] },
         :impact,
         :involvement,
         :assigned_user_id,
@@ -106,7 +106,7 @@ class IdeasController < ApplicationController
         :it_system,
         :title,
         :idea,
-        :benefits,
+        { benefit_list: [] },
         :impact,
         :involvement,
         :status

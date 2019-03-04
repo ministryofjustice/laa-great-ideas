@@ -8,6 +8,7 @@ class Idea < ApplicationRecord
   belongs_to :assigned_user, class_name: 'User', optional: true
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :benefits, dependent: :destroy, autosave: true
 
   validates :title, presence: true
   validates :area_of_interest, presence: true, if: :submitted?
@@ -37,15 +38,14 @@ class Idea < ApplicationRecord
     true
   end
 
-  enum benefits: %i[
-    better_decision_making
-    improved_reputation
-    reduced_risk
-    time_saved
-    cost
-    improved_service
-    staff_engagement_and_moral
-  ]
+  def benefit_list=(incoming_benefits)
+    remove_benefit_if_necessary incoming_benefits
+    add_new_benefits incoming_benefits
+  end
+
+  def benefit?(benefit)
+    benefits.exists?(benefit: benefit)
+  end
 
   enum it_system: %i[
     cclf
@@ -124,6 +124,23 @@ class Idea < ApplicationRecord
     IdeaMailer.assigned_idea_email_template(assigned_user, self).deliver_now if saved_change_to_assigned_user_id?
 
     IdeaMailer.status_change_email_template(User.find(user_id), self).deliver_now if saved_change_to_status?
+  end
+
+  def remove_benefit_if_necessary(incoming_benefits)
+    benefits.each do |benefit|
+      benefit.destroy unless incoming_benefits.map(&:to_s).include?(benefit.benefit)
+    end
+    benefits.reload
+  end
+
+  def add_new_benefits(incoming_benefits)
+    incoming_benefits.each do |benefit|
+      if new_record?
+        benefits << Benefit.new(benefit: benefit) unless benefit? benefit
+      else
+        benefits.find_or_create_by!(benefit: benefit)
+      end
+    end
   end
 end
 # rubocop:enable Metrics/ClassLength
