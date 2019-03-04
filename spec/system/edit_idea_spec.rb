@@ -16,7 +16,7 @@ RSpec.describe 'Editing an idea', type: :system do
     describe 'editing another users idea' do
       it 'should give an error' do
         visit edit_idea_path(idea)
-        expect(page).to have_text('You are not authorised to amend this idea')
+        expect(page).to have_text('You are not authorised to amend this idea.')
       end
     end
 

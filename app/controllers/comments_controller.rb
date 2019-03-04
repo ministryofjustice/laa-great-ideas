@@ -65,9 +65,4 @@ class CommentsController < ApplicationController
       :body
     )
   end
-
-  def user_not_authorized
-    flash[:alert] = 'You cannot create a comment on this idea'
-    redirect_to(idea_path(@idea) || root_path)
-  end
 end
