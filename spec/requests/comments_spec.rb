@@ -53,9 +53,16 @@ RSpec.describe 'Comments', type: :request do
       end
 
       describe 'DELETE /comment' do
-        it 'deletes the comment' do
+        it 'deletes own comment' do
           delete idea_comment_path(comment.idea, comment)
-          expect(Comment.exists?(comment.id)).to eq false
+          comment.reload
+          expect(comment.redacted?).to eq true
+        end
+
+        it 'deletes another users comment' do
+          delete idea_comment_path(admin_comment.idea, admin_comment)
+          admin_comment.reload
+          expect(admin_comment.redacted?).to eq false
         end
       end
 
@@ -140,6 +147,20 @@ RSpec.describe 'Comments', type: :request do
           comment.reload
           expect(comment.body).to eq('Changed comment')
         end
+      end
+    end
+
+    describe 'DELETE /comment' do
+      it 'deletes anther users comment' do
+        delete idea_comment_path(comment.idea, comment)
+        comment.reload
+        expect(comment.redacted?).to eq true
+      end
+
+      it 'deletes ownd users comment' do
+        delete idea_comment_path(admin_comment.idea, admin_comment)
+        admin_comment.reload
+        expect(admin_comment.redacted?).to eq true
       end
     end
   end

@@ -81,7 +81,8 @@ Idea.find_each do |idea|
     user = User.offset(rand(User.count)).first
     idea.comments.create!(
       body: Faker::ChuckNorris.fact,
-      user: user
+      user: user,
+      redacted: false
     )
   end
 end

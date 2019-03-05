@@ -3,7 +3,11 @@
 <table class="govuk-table">
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Comment:</th>
-    <td class="govuk-table__cell"><%= @comment.body %></td>
+      <% if @comment.redacted == false %>
+        <td class="govuk-table__cell"><%= @comment.body %></td>
+      <% else %>
+        <td class="govuk-table__cell"><%= "This comment has been deleted." %></td>
+      <% end %>
   </tr>
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">User ID:</th>
@@ -14,5 +18,7 @@
     <td class="govuk-table__cell"><%= t(@comment.status_at_comment_time) %></td>
   </tr>
 </table>
-<%= link_to 'Edit', edit_idea_comment_path(@comment.idea, @comment) %> |
+<% if @comment.redacted == false %>
+  <%= link_to 'Edit', edit_idea_comment_path(@comment.idea, @comment) %>
+<% end %>
 <%= link_to 'Back', idea_path(@comment.idea) %>

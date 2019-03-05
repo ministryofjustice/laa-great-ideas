@@ -62,6 +62,7 @@ en:
   pundit:
     comment_policy:
       create?: You cannot create a comment on this idea.
+      destroy?: You cannot delete this comment.
       update?: You cannot edit this comment.
     default: You cannot perform this action.
     idea_policy:
