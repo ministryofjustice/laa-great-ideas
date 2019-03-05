@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Ideas submission', type: :system do
   let(:default_user) { create :user }
-  let(:idea) { create :idea }
+  let(:idea) { create :idea, user: default_user }
   let(:complete_idea) { create :complete_idea, user: default_user }
 
   before do

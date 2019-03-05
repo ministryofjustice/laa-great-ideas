@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Update status', type: :system do
   let(:default_user) { create :user }
   let(:admin_user) { create :admin }
-  let(:idea) { create :idea }
+  let(:idea) { create :idea, user: default_user }
 
   describe 'user updating an idea' do
     it 'should not be possible to update the status of the idea' do

@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Add a comment', type: :system do
   let(:default_user) { create :user }
-  let(:idea) { create :idea }
-  let(:approved_idea) { create :approved_idea }
+  let(:idea) { create :idea, user: default_user }
+  let(:approved_idea) { create :approved_idea, user: default_user }
   let(:comment) { create :comment, user: default_user }
 
   context 'a logged in user' do
