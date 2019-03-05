@@ -59,6 +59,14 @@ en:
   pims: PIMS
   planning_and_performance: Planning and Performance
   public_defender_service: Public Defender Service
+  pundit:
+    comment_policy:
+      create?: You cannot create a comment on this idea.
+      update?: You cannot edit this comment.
+    default: You cannot perform this action.
+    idea_policy:
+      edit?: You are not authorised to amend this idea.
+      update?: You are not authorised to amend this idea.
   reduced_risk: Reduced Risk
   service_development: Service Development
   staff_engagement: Staff Engagement
