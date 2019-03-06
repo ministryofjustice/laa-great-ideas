@@ -13,8 +13,6 @@ RSpec.describe Idea, type: :model do
       before { allow(subject).to receive(:submitted?).and_return(true) }
       it { should validate_presence_of(:title) }
       it { should validate_presence_of(:area_of_interest) }
-      it { should validate_presence_of(:business_area) }
-      it { should validate_presence_of(:it_system) }
       it { should validate_presence_of(:benefits) }
       it { should validate_presence_of(:impact) }
       it { should validate_presence_of(:involvement) }
