@@ -151,13 +151,13 @@ RSpec.describe 'Comments', type: :request do
     end
 
     describe 'DELETE /comment' do
-      it 'deletes anther users comment' do
+      it 'deletes another users comment' do
         delete idea_comment_path(comment.idea, comment)
         comment.reload
         expect(comment.redacted?).to eq true
       end
 
-      it 'deletes ownd users comment' do
+      it 'deletes own users comment' do
         delete idea_comment_path(admin_comment.idea, admin_comment)
         admin_comment.reload
         expect(admin_comment.redacted?).to eq true

@@ -6,7 +6,7 @@
       <% if @comment.redacted == false %>
         <td class="govuk-table__cell"><%= @comment.body %></td>
       <% else %>
-        <td class="govuk-table__cell"><%= "This comment has been deleted." %></td>
+        <td class="govuk-table__cell"><%= t('pundit.comment_policy.deleted') %></td>
       <% end %>
   </tr>
   <tr class="govuk-table__row">

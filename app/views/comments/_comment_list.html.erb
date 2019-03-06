@@ -24,7 +24,7 @@
         </tr>
       <% else %>
         <tr class="govuk-table__row">
-          <td class="govuk-table__cell">This comment has been deleted.</td>
+          <td class="govuk-table__cell"><%= t('pundit.comment_policy.deleted') %></td>
           <td class="govuk-table__cell"><%= comment.user.email %></td>
           <td class="govuk-table__cell"><%= t(comment.status_at_comment_time) %></td>
           <td class="govuk-table__cell"><%= comment.created_at %></td>

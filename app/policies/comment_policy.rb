@@ -22,7 +22,7 @@ class CommentPolicy < ApplicationPolicy
   def destroy?
     return true if user.admin && record.redacted? == false
 
-    owner? && record.redacted? == false
+    owner? && !record.redacted?
   end
 
   private
