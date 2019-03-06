@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Assign idea', type: :system do
   let(:default_user) { create :user }
   let(:admin_user) { create :admin }
-  let(:idea) { create :idea }
+  let(:idea) { create :idea, user: default_user }
 
   describe 'user creating an idea' do
     it 'should not be possible to assign the idea' do

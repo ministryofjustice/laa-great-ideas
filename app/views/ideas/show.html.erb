@@ -1,6 +1,10 @@
 <% title "Idea" %>
 <table class="govuk-table">
   <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="row">Author:</th>
+    <td class="govuk-table__cell"><%= @idea.user.email %></td>
+  </tr>
+  <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Area of Interest:</th>
     <td class="govuk-table__cell"><%= t(@idea.area_of_interest) %></td>
   </tr>
