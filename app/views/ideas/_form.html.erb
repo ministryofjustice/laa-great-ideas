@@ -11,15 +11,15 @@
           </ul>
         </div>
     <% end %>
-    <div class="govuk-form-group">
-        <%= form.label :area_of_interest, class: "govuk-label" %>            
+    <div class="govuk-form-group" id="area-of-intrest">
+        <%= form.label :area_of_interest, class: "govuk-label" %>
         <%= form.select :area_of_interest,  enum_to_select(Idea.area_of_interests), { include_blank: 'Please select' }, { class: "govuk-select" } %>
     </div>
-    <div class="govuk-form-group">
+    <div class="govuk-form-group" id="business-area" >
       <%= form.label :business_area, class: "govuk-label" %>
       <%= form.select :business_area, enum_to_select(Idea.business_areas), { include_blank: 'Please select' }, { class: "govuk-select" } %>
     </div>
-    <div class="govuk-form-group">
+    <div class="govuk-form-group" id="it-system">
       <%= form.label :it_system, class: "govuk-label" %>
       <%= form.select :it_system, enum_to_select(Idea.it_systems), { include_blank: 'Please select' }, { class: "govuk-select" } %>
     </div>
@@ -32,7 +32,7 @@
       <%= form.text_area :idea, class: "govuk-textarea" %>
     </div>
     <div class="govuk-form-group">
-      <%= form.label :benefits, class: "govuk-label" %> 
+      <%= form.label :benefits, class: "govuk-label" %>
           <span class="govuk-hint">Select all that apply.</span>
           <div class="govuk-checkboxes">
             <% Benefit.benefits.keys.each do |benefit| %>
@@ -75,7 +75,7 @@
                       <label class="govuk-label govuk-date-input__label" for="review-month">
                         Month
                       </label>
-                      <%= form.text_field :review_month, class: "govuk-input govuk-date-input__input govuk-input--width-2", type: "number", pattern: "[0-9]*" %> 
+                      <%= form.text_field :review_month, class: "govuk-input govuk-date-input__input govuk-input--width-2", type: "number", pattern: "[0-9]*" %>
                   </div>
                 </div>
                 <div class="govuk-date-input__item">
@@ -83,7 +83,7 @@
                       <label class="govuk-label govuk-date-input__label" for="review-year">
                           Year
                       </label>
-                      <%= form.text_field :review_year, class: "govuk-input govuk-date-input__input govuk-input--width-4", type: "number", pattern: "[0-9]*" %> 
+                      <%= form.text_field :review_year, class: "govuk-input govuk-date-input__input govuk-input--width-4", type: "number", pattern: "[0-9]*" %>
                   </div>
                 </div>
             </div>
@@ -102,3 +102,26 @@
     <% end %>
   </div>
 </div>
+<script>
+
+  var business_area = document.getElementById('business-area');
+  var area_of_interest = document.getElementById('idea_area_of_interest');
+  var it_system = document.getElementById('it-system');
+
+  business_area.style.display = 'none';
+  it_system.style.display = 'none';
+
+  area_of_interest.addEventListener('change', function() {
+   if (area_of_interest.value === 'other_business_area'){
+    business_area.style.display = "block"
+   }else {
+      business_area.style.display = "none"
+   }
+   if (area_of_interest.value === 'it_development'){
+     it_system.style.display = "block"
+   }else {
+      it_system.style.display = "none"
+   }
+  });
+
+</script>
