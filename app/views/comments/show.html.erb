@@ -3,7 +3,7 @@
 <table class="govuk-table">
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="row">Comment:</th>
-      <% if @comment.redacted == false %>
+      <% if !@comment.redacted %>
         <td class="govuk-table__cell"><%= @comment.body %></td>
       <% else %>
         <td class="govuk-table__cell"><%= t('pundit.comment_policy.deleted') %></td>
@@ -18,7 +18,7 @@
     <td class="govuk-table__cell"><%= t(@comment.status_at_comment_time) %></td>
   </tr>
 </table>
-<% if @comment.redacted == false %>
+<% if !@comment.redacted %>
   <%= link_to 'Edit', edit_idea_comment_path(@comment.idea, @comment) %>
 <% end %>
 <%= link_to 'Back', idea_path(@comment.idea) %>

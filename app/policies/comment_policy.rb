@@ -8,7 +8,7 @@ class CommentPolicy < ApplicationPolicy
   def update?
     return true if user.admin
 
-    owner? && record.redacted? == false
+    owner? && !record.redacted?
   end
 
   def create?
@@ -20,7 +20,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    return true if user.admin && record.redacted? == false
+    return true if user.admin && !record.redacted?
 
     owner? && !record.redacted?
   end

@@ -10,7 +10,7 @@
   </thead>
   <tbody class="govuk-table__body">
     <% comments.each do |comment| %>
-      <% if comment.redacted == false %>
+      <% if !comment.redacted %>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell"><%= comment.body %></td>
           <td class="govuk-table__cell"><%= comment.user.email %></td>
