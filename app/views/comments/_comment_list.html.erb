@@ -10,15 +10,26 @@
   </thead>
   <tbody class="govuk-table__body">
     <% comments.each do |comment| %>
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell"><%= comment.body %></td>
-        <td class="govuk-table__cell"><%= comment.user.email %></td>
-        <td class="govuk-table__cell"><%= t(comment.status_at_comment_time) %></td>
-        <td class="govuk-table__cell"><%= comment.created_at %></td>
-        <td class="govuk-table__cell"><%= link_to 'Show', idea_comment_path(comment.idea, comment) %></td>
-        <td class="govuk-table__cell"><%= link_to 'Edit', edit_idea_comment_path(comment.idea, comment) %></td>
-        <td class="govuk-table__cell"><%= link_to 'Destroy', idea_comment_path(comment.idea, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% if !comment.redacted %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell"><%= comment.body %></td>
+          <td class="govuk-table__cell"><%= comment.user.email %></td>
+          <td class="govuk-table__cell"><%= t(comment.status_at_comment_time) %></td>
+          <td class="govuk-table__cell"><%= comment.created_at %></td>
+          <td class="govuk-table__cell"><%= link_to 'Show', idea_comment_path(comment.idea, comment) %></td>
+          <td class="govuk-table__cell"><%= link_to 'Edit', edit_idea_comment_path(comment.idea, comment) %></td>
+          <% if policy(comment).destroy? %>
+            <td class="govuk-table__cell"><%= link_to 'Delete', idea_comment_path(comment.idea, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% else %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell"><%= t('pundit.comment_policy.deleted') %></td>
+          <td class="govuk-table__cell"><%= comment.user.email %></td>
+          <td class="govuk-table__cell"><%= t(comment.status_at_comment_time) %></td>
+          <td class="govuk-table__cell"><%= comment.created_at %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

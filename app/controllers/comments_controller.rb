@@ -30,8 +30,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
-    redirect_to ideas_url, notice: 'Comment was successfully destroyed.'
+    authorize @comment
+
+    @comment.redacted = true
+    @comment.save!
+    redirect_to idea_path(@comment.idea), notice: 'Comment was successfully deleted.'
   end
 
   def create
