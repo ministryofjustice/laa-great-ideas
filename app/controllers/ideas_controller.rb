@@ -8,14 +8,7 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = case params[:view]
-             when 'assigned'
-               Idea.where(assigned_user_id: [current_user.id])
-             when 'submitted'
-               Idea.where.not(submission_date: [nil, ''])
-             else
-               Idea.all
-             end
+    @ideas = Idea.all
   end
 
   # GET /ideas/1

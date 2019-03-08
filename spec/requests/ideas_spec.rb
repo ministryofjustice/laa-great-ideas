@@ -181,26 +181,6 @@ RSpec.describe 'Ideas', type: :request do
       end
     end
 
-    describe "GET /ideas(view: 'assigned')" do
-      it 'should show a list of my assigned ideas' do
-        create :idea, title: 'Assign idea', assigned_user_id: admin_user.id
-        get ideas_path(view: 'assigned')
-        expect(response).to have_http_status(200)
-        expect(response.body).to include 'Assign idea'
-      end
-    end
-
-    describe "GET /ideas(view: 'submitted')" do
-      it 'should show a list of submitted ideas' do
-        sub_idea = submitted_idea
-        sub_idea.user = admin_user
-        sub_idea.save
-        get ideas_path(view: 'submitted')
-        expect(response).to have_http_status(200)
-        expect(response.body).to include 'New idea1'
-      end
-    end
-
     describe 'submitting an idea with a past review date' do
       it 'should not update existing idea' do
         patch idea_path(idea), params: { idea: { assigned_user_id: admin_user.id, status: 'approved',
