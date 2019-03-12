@@ -46,13 +46,13 @@ puts 'Create random ideas'
   idea = user.ideas.create!(
     title: Faker::Book.title,
     area_of_interest: Idea.area_of_interests.key(rand(Idea.area_of_interests.count)),
-    business_area: Idea.business_areas.key(rand(Idea.business_areas.count)),
-    it_system: Idea.it_systems.key(rand(Idea.it_systems.count)),
     idea: Faker::TvShows::Simpsons.quote,
     impact: 'Impact',
     involvement: Idea.involvements.key(rand(Idea.involvements.count)),
     status: Idea.statuses.key(rand(Idea.statuses.count))
   )
+  idea.it_system = Idea.it_systems.key(rand(Idea.it_systems.count)) if idea.area_of_interest == 'it_development'
+  idea.business_area = Idea.business_areas.key(rand(Idea.business_areas.count)) if idea.area_of_interest == 'my_business_area'
   Benefit.create!(idea_id: idea.id, benefit: Benefit.benefits.key(rand(Benefit.benefits.count)))
   unless idea.status == 'draft'
     idea.submission_date = Faker::Time.between(Time.now - 30, Time.now)

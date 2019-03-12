@@ -7,8 +7,6 @@ FactoryBot.define do
 
     factory :complete_idea do
       area_of_interest { 0 }
-      business_area { 0 }
-      it_system { 0 }
       idea { 'Idea' }
       impact { 'Impact' }
       involvement { 0 }

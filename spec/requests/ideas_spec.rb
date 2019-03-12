@@ -10,6 +10,7 @@ RSpec.describe 'Ideas', type: :request do
   let(:idea2) { create :idea, title: 'New idea2', user: default_user }
   let(:complete_idea) { create :complete_idea }
   let(:submitted_idea) { create :submitted_idea }
+  let(:it_idea) { create :idea, user: default_user }
 
   describe 'As a logged in user' do
     before do
@@ -95,8 +96,6 @@ RSpec.describe 'Ideas', type: :request do
         expect(complete_idea.submission_date).to_not be_nil
         expect(complete_idea.status).to eq 'awaiting_approval'
         expect(complete_idea.area_of_interest).to_not be_nil
-        expect(complete_idea.business_area).to_not be_nil
-        expect(complete_idea.it_system).to_not be_nil
         expect(complete_idea.title).to_not be_nil
         expect(complete_idea.idea).to_not be_nil
         expect(complete_idea.benefits).to_not be_nil
@@ -110,6 +109,26 @@ RSpec.describe 'Ideas', type: :request do
         post idea_submit_path(idea)
         expect(idea.submission_date).to be_nil
         expect(response.body).to include('prohibited this idea from being saved:')
+      end
+    end
+
+    describe 'submitting an idea with an it sytem and invalid area of interest' do
+      it 'should not update existing idea' do
+        patch idea_path(idea), params: { idea: { it_system: 'cwa',
+                                                 area_of_interest: 'my_office' } }
+        post idea_submit_path(idea)
+        expect(it_idea.it_system).to be_nil
+        expect(response.body).to include('IT System invalid area of interest')
+      end
+    end
+
+    describe 'submitting an idea with a business area and invalid area of interest' do
+      it 'should not update existing idea' do
+        patch idea_path(idea), params: { idea: { business_area: 'exceptional_and_complex_cases',
+                                                 area_of_interest: 'equality_and_diversity' } }
+        post idea_submit_path(idea)
+        expect(submitted_idea.business_area).to be_nil
+        expect(response.body).to include('Business Area invalid area of interest')
       end
     end
   end
