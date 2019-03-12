@@ -22,6 +22,12 @@ class Idea < ApplicationRecord
   before_validation :update_review_date
   after_update :send_update_notifications
 
+  default_scope { order(:submission_date) }
+  scope :approved_or_beyond, -> { where.not(status: [:awaiting_approval, :draft]) }
+  scope :allocated_ideas, ->(user) { where('assigned_user_id = ?', user) }
+  scope :my_ideas, ->(user) { where('user_id = ?', user) }
+  scope :review, -> { unscoped.where(status: [:approved, :investigation, :implementing, :interim_benefits]).order(:review_date) }
+
   def submitted?
     submission_date.present?
   end

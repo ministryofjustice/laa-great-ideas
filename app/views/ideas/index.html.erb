@@ -19,8 +19,8 @@
       </li>
     <% end %>  
     <li class="govuk-tabs__list-item">
-      <a class="govuk-tabs__tab" href="#uncompleted-ideas">
-        All Uncompleted Ideas
+      <a class="govuk-tabs__tab" href="#all-ideas">
+        All Ideas
       </a>
     </li>
     <% if current_user&.admin? %>
@@ -41,11 +41,11 @@
   </section>
   <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="review-date">
     <h2 class="govuk-heading-l">Review Date</h2>
-    <%= render 'review_date_and_uncompleted_ideas_table' %>
+    <%= render 'review_date_table' %>
   </section>
-  <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="uncompleted-ideas">
-    <h2 class="govuk-heading-l">All Uncompleted Ideas</h2>
-    <%= render 'review_date_and_uncompleted_ideas_table' %>
+  <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="all-ideas">
+    <h2 class="govuk-heading-l">All Ideas</h2>
+    <%= render 'all_ideas_table' %>
   </section>
   <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="allocated-ideas">
     <h2 class="govuk-heading-l">My Allocated Ideas</h2>

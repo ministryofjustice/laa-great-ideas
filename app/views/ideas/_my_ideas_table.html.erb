@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-    <% @ideas.each do |idea| %>
+    <% Idea.my_ideas(current_user).each do |idea| %>
       <tr>
         <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
         <td class="govuk-table__cell"><%= idea.title %></td>

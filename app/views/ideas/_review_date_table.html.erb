@@ -4,17 +4,24 @@
       <th class="govuk-table__header" scope="col">Idea ID</th>
       <th class="govuk-table__header" scope="col">Title</th>
       <th class="govuk-table__header" scope="col">Author</th>
+      <th class="govuk-table__header" scope="col">Status</th>
       <th class="govuk-table__header" scope="col">Submitted Date</th>
+      <th class="govuk-table__header" scope="col">Review Date</th>
+      <th class="govuk-table__header" scope="col">Votes</th>
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-    <% Idea.awaiting_approval.each do |idea| %>
+    <% Idea.all.each do |idea| %>
       <tr>
         <td class="govuk-table__cell"><%= link_to idea.id, idea %></td>
         <td class="govuk-table__cell"><%= idea.title %></td>
         <td class="govuk-table__cell"><%= idea.user&.email %></td>
+        <td class="govuk-table__cell"><%= t(idea.status) %></td>
         <td class="govuk-table__cell"><%= idea.submission_date&.strftime("%e %B %Y") %></td>
+        <td class="govuk-table__cell"><%= idea.review_date&.strftime("%e %B %Y") %></td>
+        <td class="govuk-table__cell"><%= idea.votes.count %></td>
       </tr>
-    <% end %>
+    <% end %>  
   </tbody>
 </table>
+

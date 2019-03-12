@@ -40,6 +40,8 @@ group :development, :test do
   gem 'i18n-tasks', '~> 0.9.28'
   gem 'rspec-rails'
   gem 'rubocop'
+  gem 'timecop'
+  gem 'awesome_print'
 end
 
 group :development do
