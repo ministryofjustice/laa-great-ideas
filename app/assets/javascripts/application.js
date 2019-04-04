@@ -13,5 +13,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .
 //= require "govuk-frontend/all"
+//= require dropdownjs
+//= require_tree .
+
